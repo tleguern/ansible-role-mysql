@@ -1,6 +1,6 @@
 ---
 - name: Restart mysql
   service:
-    name: "{{ mysql_daemon }}"
+    name: "{{ mysql_service }}"
     state: restarted
     sleep: 5

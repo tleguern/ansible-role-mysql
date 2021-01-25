@@ -1,11 +1,12 @@
 ---
-mysql_daemon: "{{ __mysql_daemon }}"
-mysql_datadir: "{{ __mysql_datadir }}"
-mysql_packages: "{{ __mysql_packages }}"
-mysql_system_group: "{{ __mysql_system_group }}"
-mysql_system_user: "{{ __mysql_system_user }}"
+mysql_databases: []
+mysql_db_admin_password_update: false
 mysql_db_admin_user: root
 __mysql_db_admin_password: "{{ mysql_db_admin_password | mandatory }}"
-mysql_db_admin_password_update: false
-mysql_databases: []
 mysql_users: []
+
+mysql_datadir: "{{ __mysql_datadir }}"
+mysql_packages: "{{ __mysql_packages }}"
+mysql_service: "{{ __mysql_service }}"
+mysql_system_group: "{{ __mysql_system_group }}"
+mysql_system_user: "{{ __mysql_system_user }}"

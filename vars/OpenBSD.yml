@@ -1,5 +1,5 @@
 ---
-__mysql_daemon: mysqld
+__mysql_service: mysqld
 __mysql_packages:
   - mariadb-client
   - mariadb-server

@@ -9,6 +9,6 @@
 
 - name: Configure - Ensure MySQL is started and enabled on boot.
   service:
-    name: "{{ mysql_daemon }}"
+    name: "{{ mysql_service }}"
     state: started
     enabled: yes
