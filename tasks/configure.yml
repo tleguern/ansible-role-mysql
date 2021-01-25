@@ -1,0 +1,14 @@
+---
+- name: Configure - Ensure datadir exists.
+  file:
+    path: "{{ mysql_datadir }}"
+    state: directory
+    owner: "{{ mysql_system_user }}"
+    group: "{{ mysql_system_group }}"
+    mode: 0700
+
+- name: Configure - Ensure MySQL is started and enabled on boot.
+  service:
+    name: "{{ mysql_daemon }}"
+    state: started
+    enabled: yes

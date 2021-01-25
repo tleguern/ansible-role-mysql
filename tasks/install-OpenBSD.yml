@@ -1,0 +1,34 @@
+---
+- name: OpenBSD - Ensure MySQL packages are installed.
+  openbsd_pkg:
+    name: "{{ mysql_packages }}"
+    state: present
+  register: mysql_install_packages
+
+- name: OpenBSD - Post-installation.
+  block:
+    - name: OpenBSD - Ensure MySQL database is correctly initialized.
+      command: /usr/local/bin/mysql_install_db
+
+    - name: OpenBSD - Ensure /etc/my.cnf is configured.
+      copy:
+        dest: /etc/my.cnf
+        owner: root
+        group: wheel
+        mode: 0644
+        content: "{{ __mysql_mycnf }}"
+
+    - name: OpenBSD - Ensure /var/run/mysql has correct rights
+      file:
+        path: /var/run/mysql
+        state: directory
+        owner: "{{ mysql_system_user }}"
+        group: "{{ mysql_system_group }}"
+        mode: 0711
+
+    - name: OpenBSD - Ensure MySQL is started and enabled on boot.
+      service:
+        name: "{{ mysql_daemon }}"
+        state: started
+        enabled: true
+  when: mysql_install_packages.changed

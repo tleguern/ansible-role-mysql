@@ -1,0 +1,20 @@
+---
+dependencies: []
+
+galaxy_info:
+  role_name: mysql
+  author: "Jeff Geerling / Tristan Le Guern"
+  description: "MySQL server for OpenBSD"
+  company: "Gwern"
+  license: "license (BSD, MIT)"
+  min_ansible_version: 2.4
+  platforms:
+    - name: OpenBSD
+      versions:
+        - "6.8"
+  galaxy_tags:
+    - database
+    - mysql
+    - mariadb
+    - db
+    - sql

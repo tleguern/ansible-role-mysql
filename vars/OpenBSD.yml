@@ -1,0 +1,27 @@
+---
+__mysql_daemon: mysqld
+__mysql_packages:
+  - mariadb-client
+  - mariadb-server
+  - py3-pymysql
+__mysql_datadir: /var/mysql
+__mysql_system_user: _mysql
+__mysql_system_group: _mysql
+
+__mysql_root_user: root
+__mysql_root_group: wheel
+__mysql_root_home: /root
+
+__mysql_mycnf: |
+  [client-server]
+  socket=/var/run/mysql/mysql.sock
+  port=3306
+  [client]
+  [mysqld]
+  bind-address=127.0.0.1
+  data=/var/mysql
+  log-basename=mysqld
+  general-log
+  slow_query_log
+  [mysqld_safe]
+  syslog

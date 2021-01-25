@@ -1,0 +1,17 @@
+---
+- name: Include OS-specific variables.
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.yml"
+    - "{{ ansible_os_family }}.yml"
+
+- name: Execute OS-specific tasks.
+  include_tasks: install-{{ ansible_os_family }}.yml
+
+- include_tasks: configure.yml
+- include_tasks: password-change.yml
+  when: mysql_install_packages.changed or mysql_db_admin_password_update
+- include_tasks: secure-installation.yml
+  when: mysql_install_packages.changed
+- include_tasks: databases.yml
+- include_tasks: users.yml
