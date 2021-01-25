@@ -19,7 +19,7 @@ __mysql_mycnf: |
   [client]
   [mysqld]
   bind-address=127.0.0.1
-  data=/var/mysql
+  datadir=/var/mysql
   log-basename=mysqld
   general-log
   slow_query_log
