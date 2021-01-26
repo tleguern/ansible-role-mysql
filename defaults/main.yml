@@ -10,3 +10,6 @@ mysql_packages: "{{ __mysql_packages }}"
 mysql_service: "{{ __mysql_service }}"
 mysql_system_group: "{{ __mysql_system_group }}"
 mysql_system_user: "{{ __mysql_system_user }}"
+
+mysql_extra_config: []
+__mysql_config: "{{ __mysql_system_config | combine(mysql_extra_config) }}"

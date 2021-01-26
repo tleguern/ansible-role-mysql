@@ -11,12 +11,12 @@
       command: /usr/local/bin/mysql_install_db
 
     - name: OpenBSD - Ensure /etc/my.cnf is configured.
-      copy:
+      template:
+        src: my.cnf.j2
         dest: /etc/my.cnf
         owner: root
         group: wheel
         mode: 0644
-        content: "{{ __mysql_mycnf }}"
 
     - name: OpenBSD - Ensure /var/run/mysql has correct rights
       file:

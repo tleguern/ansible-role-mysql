@@ -12,3 +12,12 @@
     name: "{{ mysql_service }}"
     state: started
     enabled: yes
+
+- name: Configure - Ensure /etc/my.cnf is configured.
+  template:
+    src: my.cnf.j2
+    dest: /etc/my.cnf
+    owner: root
+    group: wheel
+    mode: 0644
+  notify: Restart mysql

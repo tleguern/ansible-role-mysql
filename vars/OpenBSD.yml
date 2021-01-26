@@ -12,16 +12,16 @@ __mysql_root_user: root
 __mysql_root_group: wheel
 __mysql_root_home: /root
 
-__mysql_mycnf: |
-  [client-server]
-  socket=/var/run/mysql/mysql.sock
-  port=3306
-  [client]
-  [mysqld]
-  bind-address=127.0.0.1
-  datadir=/var/mysql
-  log-basename=mysqld
-  general-log
-  slow_query_log
-  [mysqld_safe]
-  syslog
+__mysql_system_config:
+  client-server:
+    socket: /var/run/mysql/mysql.sock
+    port: 3306
+  client:
+  mysqld:
+    bind-address: 127.0.0.1
+    datadir: /var/mysql
+    log-basename: mysqld
+    general-log: true
+    slow_query_log: true
+  mysqld_safe:
+    syslog: true
