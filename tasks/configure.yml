@@ -7,11 +7,15 @@
     group: "{{ mysql_system_group }}"
     mode: 0700
 
-- name: Configure - Ensure MySQL is started and enabled on boot.
+- name: Configure - Ensure MySQL is enabled on boot.
+  service:
+    name: "{{ mysql_service }}"
+    enabled: yes
+
+- name: Configure - Ensure MySQL is started.
   service:
     name: "{{ mysql_service }}"
     state: started
-    enabled: yes
 
 - name: Configure - Ensure /etc/my.cnf is configured.
   template:
