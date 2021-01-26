@@ -1,0 +1,19 @@
+---
+- name: Converge
+  hosts: all
+  vars:
+    mysql_databases:
+      - name: appdata
+    mysql_users:
+      - name: appuser
+        password: apppassword
+        priv: "*.*:FILE/appdata.*:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER,CREATE\ TEMPORARY\ TABLES,LOCK\ TABLES"
+    mysql_db_admin_password: adminpassword
+  tasks:
+    - name: "Include aversiste.mysql"
+      include_role:
+        name: "aversiste.mysql"
+        apply:
+          become: yes
+          become_user: root
+          become_method: doas
