@@ -1,0 +1,18 @@
+image: openbsd/6.8
+packages:
+  - python-3.8.6p0
+  - py3-pip
+  - py3-pymysql
+  - py3-wheel
+  - py3-yamllint
+sources:
+  - https://git.sr.ht/~tleguern/ansible-role-mysql
+tasks:
+  - init: |
+      doas ln -sf /usr/local/bin/pip3.8 /usr/local/bin/pip
+  - pip: |
+      pip install -q ansible molecule
+  - molecule: |
+      export PATH="$PATH:~/.local/bin"
+      cd ansible-role-mysql
+      molecule test -s openbsd
