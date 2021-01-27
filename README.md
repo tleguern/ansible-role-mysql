@@ -3,6 +3,8 @@
 Yet another MySQL role, this time focussed on OpenBSD and based on geerlingguy's.
 The focus is on simplicity: some variables are renamed to prevent misunderstanding and the replication parameters are left for an additional role.
 
+Automatic testing is provided using molecule's delegated driver and https://builds.sr.ht.
+
 ## Requirements
 
 None.
@@ -70,6 +72,10 @@ None.
 # License
 
 MIT / BSD
+
+## Contributing
+
+Either send [send GitHub pull requests](https://github.com/Aversiste/ansible-role-mysql) or [send patches on SourceHut](https://lists.sr.ht/~tleguern/misc).
 
 # Author Information
 
