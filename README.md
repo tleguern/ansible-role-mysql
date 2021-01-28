@@ -1,5 +1,7 @@
 # Ansible Role: MySQL
 
+[![builds.sr.ht status](https://builds.sr.ht/~tleguern/ansible-role-mysql.svg)](https://builds.sr.ht/~tleguern/ansible-role-mysql?)
+
 Yet another MySQL role, this time focussed on OpenBSD and based on geerlingguy's.
 The focus is on simplicity: some variables are renamed to prevent misunderstanding and the replication parameters are left for an additional role.
 
