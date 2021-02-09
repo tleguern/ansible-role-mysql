@@ -54,15 +54,25 @@ Most of the time `mysql_db_admin_user` is `root`, this is chosen by operating sy
 
 ### `mysql_extra_config`
 
-`mysql_extra_config` is YAML representation of my.cnf, as hash of hashes.
-Its value is combined with the default minimal configuration provided for each supported operating system.
+`mysql_extra_config` is a simple representation of my.cnf in YAML as a list of hashes containing only the INI section name and its content.
+User provided values are combined with eventual system specific ones from this role.
 
 Example:
 
 ```yml
 mysql_extra_config:
-  client-server:
-    socket: /var/www/var/run/mysql/mysql.sock
+  - name: client-server
+    content: |
+      socket=/var/www/var/run/mysql/mysql.sock
+      port=3306
+    mysqld: |
+      bind-address=127.0.0.1
+      datadir=/var/mysql
+      log-basename=mysqld
+      general-log
+      slow_query_log
+    mysqld_safe: |
+      syslog
 ```
 
 ## Dependencies

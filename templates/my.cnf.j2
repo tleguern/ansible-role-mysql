@@ -1,15 +1,9 @@
 {{ ansible_managed | comment }}
 
-{% for section, content in __mysql_config.items() %}
-[{{ section }}]
-{% if content %}
-{% for key, value in content.items() %}
-{% if value == True %}
-{{ key }}
-{% else %}
-{{ key }}={{ value }}
-{% endif %}
-{% endfor %}
+{% for section in __mysql_config %}
+[{{ section.name }}]
+{% if section.content is defined and section.content != "" %}
+{{ section.content }}
 {% endif %}
 
 {% endfor %}
