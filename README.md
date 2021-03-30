@@ -16,6 +16,7 @@ None.
 | Variable | Description | Default |
 |----------|-------------|---------|
 | `mysql_databases` | The MySQL databases to create | `[]` |
+| `mysql_config_path` | Path of the main configuration file | `{{ __mysql_config_path }}` |
 | `mysql_db_admin_password_update` | Whether to force update the MySQL root user's password | `false` |
 | `mysql_db_admin_user` | MySQL default administrator account | `root` |
 | `mysql_db_admin_password` | MySQL administrator password  | mandatory |
@@ -33,6 +34,7 @@ Most of the time `mysql_db_admin_user` is `root`, this is chosen by operating sy
 
 | Variable | Default |
 |----------|---------|
+| `__mysql_config_path` | `/etc/my.cnf` |
 | `__mysql_datadir` | `/var/mysql` |
 | `__mysql_packages` | `` |
 | `__mysql_service` | `mysqld` |
