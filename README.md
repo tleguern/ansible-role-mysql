@@ -30,6 +30,17 @@ None.
 
 Most of the time `mysql_db_admin_user` is `root`, this is chosen by operating systems packagers and therefore should not be changed.
 
+### Debian
+
+| Variable | Default |
+|----------|---------|
+| `__mysql_config_path` | `/etc/mysql/my.cnf` |
+| `__mysql_datadir` | `/var/lib/mysql` |
+| `__mysql_packages` | `[mariadb-client, mariadb-server, python3-pymysql]` |
+| `__mysql_service` | `mysql` |
+| `__mysql_system_group` | `mysql` |
+| `__mysql_system_user` | `mysql` |
+
 ### OpenBSD
 
 | Variable | Default |

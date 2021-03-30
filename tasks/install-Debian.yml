@@ -1,0 +1,6 @@
+---
+- name: Debian - Ensure MySQL packages are installed.
+  apt:
+    name: "{{ mysql_packages }}"
+    state: present
+  register: mysql_install_packages
