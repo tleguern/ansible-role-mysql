@@ -36,7 +36,7 @@ Most of the time `mysql_db_admin_user` is `root`, this is chosen by operating sy
 |----------|---------|
 | `__mysql_config_path` | `/etc/my.cnf` |
 | `__mysql_datadir` | `/var/mysql` |
-| `__mysql_packages` | `` |
+| `__mysql_packages` | `[mariadb-client, mariadb-server, py3-pymysql]` |
 | `__mysql_service` | `mysqld` |
 | `__mysql_system_group` | `_mysql` |
 | `__mysql_system_user` | `_mysql` |
