@@ -8,6 +8,10 @@
 - name: Execute OS-specific tasks.
   include_tasks: install-{{ ansible_os_family }}.yml
 
+- name: Ensure missing password is detected early
+  assert:
+    that: "__mysql_db_admin_password is defined"
+
 - include_tasks: configure.yml
 - include_tasks: password-change.yml
   when: mysql_install_packages.changed or mysql_db_admin_password_update
