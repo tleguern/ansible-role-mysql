@@ -5,6 +5,7 @@ packages:
   - py3-pymysql
   - py3-wheel
   - py3-yamllint
+  - rust # Not too pleased with this ...
 sources:
   - https://git.sr.ht/~tleguern/ansible-role-mysql
 tasks:
