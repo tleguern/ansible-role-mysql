@@ -90,7 +90,7 @@ MIT / BSD
 
 ## Contributing
 
-Either send [send GitHub pull requests](https://github.com/Aversiste/ansible-role-mysql) or [send patches on SourceHut](https://lists.sr.ht/~tleguern/misc).
+Either send [send GitHub pull requests](https://github.com/tleguern/ansible-role-mysql) or [send patches on SourceHut](https://lists.sr.ht/~tleguern/misc).
 
 # Author Information
 
