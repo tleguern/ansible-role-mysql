@@ -18,4 +18,3 @@ tasks:
   - molecule: |
       cd ansible-role-mysql
       molecule test -s debian
-
