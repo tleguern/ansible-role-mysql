@@ -5,7 +5,7 @@
 Yet another MySQL role, this time focussed on OpenBSD and based on geerlingguy's.
 The focus is on simplicity: some variables are renamed to prevent misunderstanding and the replication parameters are left for an additional role.
 
-Automatic testing is provided using molecule's delegated driver and https://builds.sr.ht.
+Automatic testing is provided using molecule's delegated driver and <https://builds.sr.ht>.
 
 ## Requirements
 
@@ -77,14 +77,14 @@ None.
     - mysql_db_admin_password: "{{ vaulted_mysql_db_admin_password }}"
     - mysql_users:
         - name: app_user
-	  password: app_password
+          password: app_password
     - mysql_databases:
         - name: app_db
   roles:
     - role: ansible-role-mysql
 ```
 
-# License
+## License
 
 MIT / BSD
 
@@ -92,7 +92,7 @@ MIT / BSD
 
 Either send [send GitHub pull requests](https://github.com/tleguern/ansible-role-mysql) or [send patches on SourceHut](https://lists.sr.ht/~tleguern/misc).
 
-# Author Information
+## Author Information
 
 This role was created in 2014 by [Jeff Geerling](https://www.jeffgeerling.com/), author of [Ansible for DevOps](https://www.ansiblefordevops.com/).
 
