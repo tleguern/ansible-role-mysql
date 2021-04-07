@@ -5,14 +5,13 @@ packages:
   - py3-pymysql
   - py3-wheel
   - py3-yamllint
-  - rust # Not too pleased with this ...
+  - ansible
 sources:
   - https://git.sr.ht/~tleguern/ansible-role-mysql
 tasks:
   - init: |
       doas ln -sf /usr/local/bin/pip3.8 /usr/local/bin/pip
   - pip: |
-      pip install -q ansible
       pip install -q molecule==3.2.4
   - molecule: |
       export PATH="$PATH:~/.local/bin"
