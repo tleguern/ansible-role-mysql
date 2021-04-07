@@ -12,7 +12,7 @@
   tasks:
     - name: "Include tleguern.mysql"
       include_role:
-        name: "tleguern.mysql"
+        name: "ansible-role-mysql"
         apply:
           become: yes
           become_user: root
