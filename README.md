@@ -21,7 +21,7 @@ None.
 | `mysql_db_admin_user` | MySQL default administrator account | `root` |
 | `mysql_db_admin_password` | MySQL administrator password  | mandatory |
 | `mysql_users` | The MySQL users and their privileges | `[]` |
-| `mysql_extra_config` | Extra configuration rules for my.cnf. See bellow. | `[]` |
+| `mysql_config` | Extra configuration rules for my.cnf. See bellow. | `[]` |
 | `mysql_datadir` | Directory where MySQL data are stored | `{{ __mysql_datadir }}` |
 | `mysql_packages` | A list of packages | `{{ __mysql_packages }}` |
 | `mysql_service` | MySQL service name | `{{ __mysql_service }}` |
@@ -52,15 +52,15 @@ Most of the time `mysql_db_admin_user` is `root`, this is chosen by operating sy
 | `__mysql_system_group` | `_mysql` |
 | `__mysql_system_user` | `_mysql` |
 
-### `mysql_extra_config`
+### `mysql_config`
 
-`mysql_extra_config` is a simple representation of my.cnf in YAML as a list of hashes containing only the INI section name and its content.
+`mysql_config` is a simple representation of my.cnf in YAML as a list of hashes containing only the INI section name and its content.
 User provided values are combined with eventual system specific ones from this role.
 
 Example:
 
 ```yml
-mysql_extra_config:
+mysql_config:
   - name: client-server
     content: |
       socket=/var/www/var/run/mysql/mysql.sock

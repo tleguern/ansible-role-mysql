@@ -1,6 +1,6 @@
 {{ ansible_managed | comment }}
 
-{% for section in __mysql_config %}
+{% for section in mysql_config %}
 [{{ section.name }}]
 {% if section.content is defined and section.content != "" %}
 {{ section.content }}
