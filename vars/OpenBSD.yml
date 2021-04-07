@@ -17,9 +17,8 @@ __mysql_root_home: /root
 __mysql_system_config:
   - name: client-server
     content: |
-      client-server:
-        socket=/var/run/mysql/mysql.sock
-        port=3306
+      socket=/var/run/mysql/mysql.sock
+      port=3306
   - name: client
   - name: mysqld
     content: |
