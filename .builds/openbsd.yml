@@ -8,12 +8,13 @@ packages:
   - ansible
 sources:
   - https://git.sr.ht/~tleguern/ansible-role-mysql
+environment:
+  PATH: "/bin:/usr/bin/:/usr/local/bin:/home/build/.local/bin"
 tasks:
   - init: |
       doas ln -sf /usr/local/bin/pip3.8 /usr/local/bin/pip
   - pip: |
       pip install -q molecule==3.2.4
   - molecule: |
-      export PATH="$PATH:~/.local/bin"
       cd ansible-role-mysql
       molecule test -s openbsd

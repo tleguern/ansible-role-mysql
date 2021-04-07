@@ -4,3 +4,48 @@
     name: "{{ mysql_packages }}"
     state: present
   register: mysql_install_packages
+
+- name: Debian - Post-installation.
+  block:
+    - name: Debian - Ensure MySQL is stopped after initial install.
+      service:
+        name: "{{ mysql_service }}"
+        state: stopped
+
+    - name: Debian - Ensure /etc/mysql exists.
+      file:
+        path: "{{ mysql_config_path | dirname }}"
+        state: directory
+        owner: root
+        group: root
+
+    - name: Debian - Ensure /etc/mysql/my.cnf is configured.
+      template:
+        src: my.cnf.j2
+        dest: "{{ mysql_config_path }}"
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: Debian - Delete innodb files created after initial install.
+      file:
+        path: "{{ mysql_datadir }}/{{ item }}"
+        state: absent
+      loop:
+        - ib_logfile0
+        - ib_logfile1
+        - ibdata1
+        - mysql # Drop the database content entirely
+
+    - name: Debian - Ensure MySQL database is correctly initialized.
+      command: /usr/bin/mysql_install_db
+
+    - name: Debian - Ensure /var/lib/mysql has correct rights
+      file:
+        path: /var/lib/mysql
+        state: directory
+        recurse: yes
+        owner: "{{ mysql_system_user }}"
+        group: "{{ mysql_system_group }}"
+
+  when: mysql_install_packages.changed

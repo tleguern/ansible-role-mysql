@@ -1,4 +1,14 @@
 ---
+- name: OpenBSD - Pre-installation.
+  block:
+    - name: OpenBSD - Ensure /etc/my.cnf is configured.
+      template:
+        src: my.cnf.j2
+        dest: /etc/my.cnf
+        owner: root
+        group: wheel
+        mode: 0644
+
 - name: OpenBSD - Ensure MySQL packages are installed.
   openbsd_pkg:
     name: "{{ mysql_packages }}"
@@ -9,14 +19,6 @@
   block:
     - name: OpenBSD - Ensure MySQL database is correctly initialized.
       command: /usr/local/bin/mysql_install_db
-
-    - name: OpenBSD - Ensure /etc/my.cnf is configured.
-      template:
-        src: my.cnf.j2
-        dest: /etc/my.cnf
-        owner: root
-        group: wheel
-        mode: 0644
 
     - name: OpenBSD - Ensure /var/run/mysql has correct rights
       file:
