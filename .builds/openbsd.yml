@@ -12,7 +12,8 @@ tasks:
   - init: |
       doas ln -sf /usr/local/bin/pip3.8 /usr/local/bin/pip
   - pip: |
-      pip install -q ansible molecule==3.2.4
+      pip install -q ansible
+      pip install -q molecule==3.2.4
   - molecule: |
       export PATH="$PATH:~/.local/bin"
       cd ansible-role-mysql
