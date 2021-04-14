@@ -16,9 +16,11 @@
     name: ""
     host: "{{ item }}"
     state: absent
+    login_unix_socket: "{{ mysql_socket }}"
   with_items: "{{ mysql_anonymous_hosts.stdout_lines|default([]) }}"
 
 - name: Secure Installation - Remove MySQL test database.
   mysql_db:
     name: 'test'
     state: absent
+    login_unix_socket: "{{ mysql_socket }}"

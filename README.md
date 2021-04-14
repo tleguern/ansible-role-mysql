@@ -15,18 +15,19 @@ None.
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `mysql_databases` | The MySQL databases to create | `[]` |
 | `mysql_config_path` | Path of the main configuration file | `{{ __mysql_config_path }}` |
-| `mysql_db_admin_password_update` | Whether to force update the MySQL root user's password | `false` |
-| `mysql_db_admin_user` | MySQL default administrator account | `root` |
-| `mysql_db_admin_password` | MySQL administrator password  | mandatory |
-| `mysql_users` | The MySQL users and their privileges | `[]` |
 | `mysql_config` | Extra configuration rules for my.cnf. See bellow. | `[]` |
+| `mysql_databases` | The MySQL databases to create | `[]` |
 | `mysql_datadir` | Directory where MySQL data are stored | `{{ __mysql_datadir }}` |
+| `mysql_db_admin_password_update` | Whether to force update the MySQL root user's password | `false` |
+| `mysql_db_admin_password` | MySQL administrator password  | mandatory |
+| `mysql_db_admin_user` | MySQL default administrator account | `root` |
 | `mysql_packages` | A list of packages | `{{ __mysql_packages }}` |
 | `mysql_service` | MySQL service name | `{{ __mysql_service }}` |
+| `mysql_socket` | MySQL Unix domain socket used for connections | `{{ __mysql_socket }}` |
 | `mysql_system_group` | MySQL system group | `{{ __mysql_system_group }}` |
 | `mysql_system_user` | MySQL system user | `{{ __mysql_system_user }}` |
+| `mysql_users` | The MySQL users and their privileges | `[]` |
 
 Most of the time `mysql_db_admin_user` is `root`, this is chosen by operating systems packagers and therefore should not be changed.
 
@@ -38,6 +39,7 @@ Most of the time `mysql_db_admin_user` is `root`, this is chosen by operating sy
 | `__mysql_datadir` | `/var/lib/mysql` |
 | `__mysql_packages` | `[mariadb-client, mariadb-server, python3-pymysql]` |
 | `__mysql_service` | `mysql` |
+| `__mysql_socket` | `/run/mysqld/mysqld.sock` |
 | `__mysql_system_group` | `mysql` |
 | `__mysql_system_user` | `mysql` |
 
@@ -49,6 +51,7 @@ Most of the time `mysql_db_admin_user` is `root`, this is chosen by operating sy
 | `__mysql_datadir` | `/var/mysql` |
 | `__mysql_packages` | `[mariadb-client, mariadb-server, py3-pymysql]` |
 | `__mysql_service` | `mysqld` |
+| `__mysql_socket` | `/var/run/mysql/mysql.sock` |
 | `__mysql_system_group` | `_mysql` |
 | `__mysql_system_user` | `_mysql` |
 
