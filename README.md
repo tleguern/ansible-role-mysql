@@ -65,13 +65,15 @@ mysql_config:
     content: |
       socket=/var/www/var/run/mysql/mysql.sock
       port=3306
-    mysqld: |
+  - name: mysqld
+    content: |
       bind-address=127.0.0.1
       datadir=/var/mysql
       log-basename=mysqld
       general-log
       slow_query_log
-    mysqld_safe: |
+  - name: mysqld_safe
+    content: |
       syslog
 ```
 
