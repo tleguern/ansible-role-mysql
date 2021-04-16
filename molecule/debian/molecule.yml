@@ -30,9 +30,6 @@ scenario:
     - converge
   test_sequence:
     - dependency
-    - lint
-    - syntax
     - converge
     - idempotence
-    - side_effect
     - verify
