@@ -63,15 +63,16 @@ User provided values are combined with eventual system specific ones from this r
 Example:
 
 ```yml
+mysql_socket: /var/www/var/run/mysql/mysql.sock
 mysql_config:
   - name: client-server
     content: |
-      socket=/var/www/var/run/mysql/mysql.sock
+      socket={{ mysql_socket }}
       port=3306
   - name: mysqld
     content: |
       bind-address=127.0.0.1
-      datadir=/var/mysql
+      datadir={{ mysql_datadir }}
       log-basename=mysqld
       general-log
       slow_query_log
