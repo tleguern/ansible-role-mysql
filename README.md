@@ -102,7 +102,7 @@ None.
 
 ## License
 
-MIT / BSD
+MIT / ISC
 
 ## Contributing
 

@@ -6,7 +6,7 @@ galaxy_info:
   author: tleguern
   description: "MySQL role derived from Jeff Geerling"
   company: "Gwern"
-  license: "license (BSD, MIT)"
+  license: "MIT / ISC"
   min_ansible_version: 2.4
   platforms:
     - name: OpenBSD
