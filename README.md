@@ -62,7 +62,7 @@ User provided values are combined with eventual system specific ones from this r
 
 Example:
 
-```yml
+```yaml
 mysql_socket: /var/www/var/run/mysql/mysql.sock
 mysql_config:
   - name: client-server
