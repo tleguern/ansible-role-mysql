@@ -81,6 +81,9 @@ mysql_config:
       syslog
 ```
 
+This configuration entirely replace the default installation provided by a system package manager such as Debian's APT.
+To emulate the split directories behaviour one should add an `!includedir` directive at the end of `mysql_config`.
+
 ## Dependencies
 
 None.
