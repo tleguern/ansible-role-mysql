@@ -11,7 +11,12 @@
         filter: databases,users
         return_empty_dbs: yes
       register: mu
+    - name: Check the size of ibdata1
+      stat:
+        path: /var/mysql/ibdata1
+      register: st
     - assert:
         that:
           - "'appuser' in mu['users']['localhost']"
           - "'appdata' in mu['databases']"
+          - "st.stat.size == 10485760"
