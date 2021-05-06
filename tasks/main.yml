@@ -6,9 +6,11 @@
     - "{{ ansible_distribution }}.yml"
     - "{{ ansible_os_family }}.yml"
 
-- name: Ensure missing password is detected early
+- name: Ensure role's variable are correctly configured.
   assert:
-    that: "__mysql_db_admin_password is defined"
+    that:
+      - "__mysql_db_admin_password is defined"
+      - "mysql_provider in __mysql_providers"
 
 - name: Execute OS-specific tasks.
   include_tasks: install-{{ ansible_distribution }}.yml

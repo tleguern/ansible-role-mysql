@@ -17,8 +17,16 @@
 
 - name: Fedora - Post-installation.
   block:
-    - name: Fedora - Ensure MySQL database is correctly initialized.
+    - name: Fedora - Ensure MySQL database is correctly initialized (mariadb).
       command: /usr/bin/mysql_install_db
+      when: mysql_provider == 'mariadb'
+
+    - name: Fedora - Ensure MySQL database is correctly initialized (mysql).
+      command: |
+        mysqld --initialize-insecure \
+               --user={{ mysql_system_user }} \
+               --datadir={{ mysql_datadir }}
+      when: mysql_provider == 'mysql'
 
     - name: Fedora - Ensure /var/lib/mysql has correct rights.
       file:

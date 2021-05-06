@@ -10,6 +10,8 @@ sources:
   - https://git.sr.ht/~tleguern/ansible-role-mysql
 environment:
   PATH: "/bin:/usr/bin/:/usr/local/bin:/home/build/.local/bin"
+repositories:
+  mysql: http://repo.mysql.com/apt/debian buster mysql-5.7 5072E1F5
 tasks:
   - pip: |
       python3 -m pip install -qU pip
@@ -17,4 +19,4 @@ tasks:
       python3 -m pip install -q molecule==3.2.4
   - molecule: |
       cd ansible-role-mysql
-      molecule test -s debian-mariadb
+      molecule test -s debian-mysql
