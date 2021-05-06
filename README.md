@@ -2,14 +2,20 @@
 
 [![builds.sr.ht status](https://builds.sr.ht/~tleguern/ansible-role-mysql.svg)](https://builds.sr.ht/~tleguern/ansible-role-mysql?)
 
-Yet another MySQL role, this time focussed on OpenBSD and based on geerlingguy's.
-The focus is on simplicity: some variables are renamed to prevent misunderstanding and the replication parameters are left for an additional role.
+Installs and configures MySQL or MariaDB on the following operating systems:
+
+- OpenBSD
+- Debian
+- Fedora
+
+This role is originally based on Jeff Geerling's with an emphasis on better portability (ie: Non-Linux unixen) and simplicity.
+It is therefore not entirely compatible as some variables were renamed to prevent misunderstanding and the replication parameters have been excised and left to another role.
 
 Automatic testing is provided using molecule's delegated driver and <https://builds.sr.ht>.
 
 ## Requirements
 
-None.
+This role requires root access and should be run with `become=yes`.
 
 ## Role Variables
 
@@ -23,6 +29,7 @@ None.
 | `mysql_db_admin_password` | MySQL administrator password  | mandatory |
 | `mysql_db_admin_user` | MySQL default administrator account | `root` |
 | `mysql_packages` | A list of packages | `{{ __mysql_packages }}` |
+| `mysql_provider` | Either `mariadb` or `mysql` | `mariadb` |
 | `mysql_service` | MySQL service name | `{{ __mysql_service }}` |
 | `mysql_socket` | MySQL Unix domain socket used for connections | `{{ __mysql_socket }}` |
 | `mysql_system_group` | MySQL system group | `{{ __mysql_system_group }}` |
@@ -95,6 +102,24 @@ mysql_config:
 
 This configuration entirely replace the default installation provided by a system package manager such as Debian's APT.
 To emulate the split directories behaviour one should add an `!includedir` directive at the end of `mysql_config`.
+
+### `mysql_provider`
+
+This variable is used to specify the provider for `mysql`: either MariaDB (the default on most operating systems now) or MySQL.
+
+If you want to install the later it is mandatory to configure your package repository in advance, perhaps with a `pre_tasks` in a playbook.
+Then the following variables need to be overloaded from the default value:
+
+```yaml
+# Assuming Debian Buster
+mysql_packages:
+  - mysql-client
+  - mysql-server
+  - python3-pymysql
+mysql_provider: mysql
+```
+
+The variable `mysql_provider` is only used during the initial installation.
 
 ## Dependencies
 

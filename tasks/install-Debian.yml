@@ -27,15 +27,18 @@
         group: root
         mode: 0644
 
-    - name: Debian - Delete innodb files created after initial install.
+    - name: Debian - Remove /var/lib/mysql.
       file:
-        path: "{{ mysql_datadir }}/{{ item }}"
+        path: "{{ mysql_datadir }}"
         state: absent
-      loop:
-        - ib_logfile0
-        - ib_logfile1
-        - ibdata1
-        - mysql # Drop the database content entirely
+
+    - name: Debian - Recreate /var/lib/mysql.
+      file:
+        path: "{{ mysql_datadir }}"
+        state: directory
+        owner: "{{ mysql_system_user }}"
+        group: "{{ mysql_system_group }}"
+        mode: 0740
 
     - name: Debian - Ensure MySQL database is correctly initialized (mariadb).
       command: /usr/bin/mysql_install_db
