@@ -43,6 +43,18 @@ Most of the time `mysql_db_admin_user` is `root`, this is chosen by operating sy
 | `__mysql_system_group` | `mysql` |
 | `__mysql_system_user` | `mysql` |
 
+### Fedora
+
+| Variable | Default |
+|----------|---------|
+| `__mysql_config_path` | `/etc/my.cnf` |
+| `__mysql_datadir` | `/var/lib/mysql` |
+| `__mysql_packages` | `[mariadb, mariadb-server, python3-PyMySQL]` |
+| `__mysql_service` | `mariadb` |
+| `__mysql_socket` | `/var/lib/mysql/mysql.sock` |
+| `__mysql_system_group` | `mysql` |
+| `__mysql_system_user` | `mysql` |
+
 ### OpenBSD
 
 | Variable | Default |

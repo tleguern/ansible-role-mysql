@@ -2,7 +2,8 @@
 - name: Include OS-specific variables.
   include_vars: "{{ item }}"
   with_first_found:
-    - "{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.yml"
+    - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+    - "{{ ansible_distribution }}.yml"
     - "{{ ansible_os_family }}.yml"
 
 - name: Ensure missing password is detected early
@@ -10,7 +11,7 @@
     that: "__mysql_db_admin_password is defined"
 
 - name: Execute OS-specific tasks.
-  include_tasks: install-{{ ansible_os_family }}.yml
+  include_tasks: install-{{ ansible_distribution }}.yml
 
 - include_tasks: configure.yml
 - include_tasks: password-change.yml

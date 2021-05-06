@@ -1,0 +1,31 @@
+---
+- name: Fedora - Pre-installation.
+  block:
+    - name: Fedora - Ensure /etc/my.cnf is configured.
+      template:
+        src: my.cnf.j2
+        dest: "{{ mysql_config_path }}"
+        owner: "{{ __mysql_root_user }}"
+        group: "{{ __mysql_root_group }}"
+        mode: 0644
+
+- name: Fedora - Ensure MySQL packages are installed.
+  dnf:
+    name: "{{ mysql_packages }}"
+    state: present
+  register: mysql_install_packages
+
+- name: Fedora - Post-installation.
+  block:
+    - name: Fedora - Ensure MySQL database is correctly initialized.
+      command: /usr/bin/mysql_install_db
+
+    - name: Fedora - Ensure /var/lib/mysql has correct rights.
+      file:
+        path: /var/lib/mysql
+        state: directory
+        recurse: yes
+        owner: "{{ mysql_system_user }}"
+        group: "{{ mysql_system_group }}"
+        mode: 0700
+  when: mysql_install_packages.changed
