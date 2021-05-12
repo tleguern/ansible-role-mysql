@@ -32,6 +32,11 @@
         path: "{{ mysql_datadir }}"
         state: absent
 
+    - name: Debian - Remove existing /root/.my.cnf.
+      file:
+        path: /root/.my.cnf
+        state: absent
+
     - name: Debian - Recreate /var/lib/mysql.
       file:
         path: "{{ mysql_datadir }}"
