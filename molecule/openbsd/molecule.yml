@@ -28,6 +28,8 @@ scenario:
   converge_sequence:
     - dependency
     - converge
+  destroy_sequence:
+    - cleanup
   test_sequence:
     - dependency
     - converge
