@@ -1,7 +1,7 @@
 ---
 - name: Secure Installation - Ensure remote login is disabled for admin account.
   command: 'mysql -NBe "{{ item }}"'
-  with_items:
+  loop:
     - DELETE FROM mysql.user WHERE User='{{ mysql_db_admin_user }}' AND Host NOT IN ('localhost', '127.0.0.1', '::1')
   changed_when: false
 
@@ -17,7 +17,7 @@
     host: "{{ item }}"
     state: absent
     login_unix_socket: "{{ mysql_socket }}"
-  with_items: "{{ mysql_anonymous_hosts.stdout_lines|default([]) }}"
+  loop: "{{ mysql_anonymous_hosts.stdout_lines|default([]) }}"
 
 - name: Secure Installation - Remove MySQL test database.
   mysql_db:

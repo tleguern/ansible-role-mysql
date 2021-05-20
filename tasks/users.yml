@@ -9,5 +9,5 @@
     append_privs: "{{ item.append_privs | default('no') }}"
     encrypted: "{{ item.encrypted | default('no') }}"
     login_unix_socket: "{{ mysql_socket }}"
-  with_items: "{{ mysql_users }}"
+  loop: "{{ mysql_users }}"
   no_log: true

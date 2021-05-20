@@ -6,4 +6,4 @@
     encoding: "{{ item.encoding | default('utf8') }}"
     state: "{{ item.state | default('present') }}"
     login_unix_socket: "{{ mysql_socket }}"
-  with_items: "{{ mysql_databases }}"
+  loop: "{{ mysql_databases }}"
