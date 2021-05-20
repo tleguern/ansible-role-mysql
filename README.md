@@ -121,6 +121,33 @@ mysql_provider: mysql
 
 The variable `mysql_provider` is only used during the initial installation.
 
+### `mysql_databases`
+
+This variable is a list of hashes representing MySQL databases.
+All of its keys are parameters to the [`mysql_db` module](https://docs.ansible.com/ansible/latest/collections/community/mysql/mysql_db_module.html).
+
+| Variable     | Default           |
+|--------------|-------------------|
+| name         | mandatory         |
+| collation    | `utf8_general_ci` |
+| encoding     | `utf8`            |
+| state        | `present`         |
+
+### `mysql_users`
+
+This variable is a list of hashes representing MySQL users.
+All of its keys are parameters to the [`mysql_user` module](https://docs.ansible.com/ansible/latest/collections/community/mysql/mysql_user_module.html).
+
+| Variable     | Default     |
+|--------------|-------------|
+| name         | mandatory   |
+| host         | `localhost` |
+| password     | mandatory   |
+| priv         | `*.*:USAGE` |
+| state        | `present`   |
+| append_privs | `no`        |
+| encrypted    | `no`        |
+
 ## Dependencies
 
 None.
