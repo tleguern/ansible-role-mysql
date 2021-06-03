@@ -5,6 +5,8 @@ mysql_db_admin_user: root
 __mysql_db_admin_password: "{{ mysql_db_admin_password | mandatory }}"
 mysql_users: []
 mysql_provider: mariadb
+mysql_enabled_on_startup: yes
+mysql_service_state: started
 
 mysql_datadir: "{{ __mysql_datadir }}"
 mysql_packages: "{{ __mysql_packages }}"

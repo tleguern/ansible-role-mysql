@@ -36,4 +36,10 @@
         owner: "{{ mysql_system_user }}"
         group: "{{ mysql_system_group }}"
         mode: 0700
+
+    - name: Fedora - Ensure MySQL is started.
+      service:
+        name: "{{ mysql_service }}"
+        state: started
+
   when: mysql_install_packages.changed

@@ -19,3 +19,8 @@
   when: mysql_install_packages.changed
 - include_tasks: databases.yml
 - include_tasks: users.yml
+
+- name: Configure - Ensure MySQL is started.
+  service:
+    name: "{{ mysql_service }}"
+    state: "{{ mysql_service_state }}"

@@ -74,6 +74,11 @@
         owner: "{{ mysql_system_user }}"
         group: "{{ mysql_system_group }}"
 
+    - name: Debian - Ensure MySQL is started.
+      service:
+        name: "{{ mysql_service }}"
+        state: started
+
   when:
     - mysql_install_packages.changed
     - mysql_force_clean_install
