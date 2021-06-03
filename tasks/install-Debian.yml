@@ -74,4 +74,6 @@
         owner: "{{ mysql_system_user }}"
         group: "{{ mysql_system_group }}"
 
-  when: mysql_install_packages.changed
+  when:
+    - mysql_install_packages.changed
+    - mysql_force_clean_install
