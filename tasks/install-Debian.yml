@@ -27,10 +27,20 @@
         group: root
         mode: 0644
 
-    - name: Debian - Remove /var/lib/mysql.
-      file:
+    - name: Debian - Find files in /var/lib/mysql.
+      find:
         path: "{{ mysql_datadir }}"
+        recurse: yes
+        file_type: any
+      register: mysql_files_db
+
+    - name: Debian - Remove /var/lib/mysql content.
+      file:
+        path: "{{ item.path }}"
         state: absent
+      loop: "{{ mysql_files_db.files }}"
+      loop_control:
+        label: "{{ item.path }}"
 
     - name: Debian - Remove existing /root/.my.cnf.
       file:
