@@ -79,6 +79,4 @@
         name: "{{ mysql_service }}"
         state: started
 
-  when:
-    - mysql_install_packages.changed
-    - mysql_force_clean_install
+  when: mysql_install_packages.changed

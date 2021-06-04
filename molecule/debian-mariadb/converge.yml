@@ -21,7 +21,6 @@
           general-log=true
           slow_query_log=true
           innodb_data_file_path=ibdata1:10M;ibdata2:10M:autoextend
-    mysql_force_clean_install: yes
   tasks:
     - name: "Include tleguern.mysql"
       include_role:

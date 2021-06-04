@@ -28,7 +28,6 @@ This role requires root access and should be run with `become=yes`.
 | `mysql_db_admin_password_update` | Whether to force update the MySQL root user's password | `false` |
 | `mysql_db_admin_password` | MySQL administrator password  | mandatory |
 | `mysql_db_admin_user` | MySQL default administrator account | `root` |
-| `mysql_force_clean_install` | Only on Debian. Remove the APT configured database | `no` |
 | `mysql_packages` | A list of packages | `{{ __mysql_packages }}` |
 | `mysql_provider` | Either `mariadb` or `mysql` | `mariadb` |
 | `mysql_service` | MySQL service name | `{{ __mysql_service }}` |
