@@ -120,6 +120,7 @@ mysql_packages:
   - mysql-client
   - mysql-server
   - python3-pymysql
+mysql_service: mysql
 mysql_provider: mysql
 ```
 
