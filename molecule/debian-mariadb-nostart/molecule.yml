@@ -33,6 +33,5 @@ scenario:
   test_sequence:
     - dependency
     - converge
-    - idempotence
     - verify
     - cleanup

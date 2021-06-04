@@ -18,3 +18,4 @@ tasks:
   - molecule: |
       cd ansible-role-mysql
       molecule test -s debian-mariadb
+      molecule test -s debian-mariadb-nostart

@@ -1,0 +1,23 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  become: no
+  become_user: root
+  become_method: sudo
+  tasks:
+    - name: Load system variables.
+      include_vars: ../../vars/Debian.yml
+
+    - name: Load default variables.
+      include_vars: ../../defaults/main.yml
+
+    - name: Gather service facts.
+      service_facts:
+
+    - name: Check that MySQL is not running.
+      assert: 
+        that:
+          - "(mysql_service + '.service') in hostvars[inventory_hostname]['services']"
+          - hostvars[inventory_hostname]['services']['mariadb.service'].state == 'inactive'
+          - hostvars[inventory_hostname]['services']['mariadb.service'].status == 'disabled'
