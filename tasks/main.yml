@@ -20,7 +20,7 @@
 - include_tasks: databases.yml
 - include_tasks: users.yml
 
-- name: Configure - Ensure MySQL is started.
+- name: Ensure MySQL is in the correct state.
   service:
     name: "{{ mysql_service }}"
     state: "{{ mysql_service_state }}"
