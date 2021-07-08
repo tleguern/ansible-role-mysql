@@ -4,3 +4,4 @@
     name: "{{ mysql_service }}"
     state: restarted
     sleep: 5
+  when: mysql_start_after_install

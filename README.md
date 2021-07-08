@@ -28,7 +28,6 @@ This role requires root access and should be run with `become=yes`.
 | `mysql_db_admin_password_update` | Whether to force update the MySQL root user's password | `false` |
 | `mysql_db_admin_password` | MySQL administrator password  | mandatory |
 | `mysql_db_admin_user` | MySQL default administrator account | `root` |
-| `mysql_force_clean_install` | Only on Debian. Remove the APT configured database | `no` |
 | `mysql_packages` | A list of packages | `{{ __mysql_packages }}` |
 | `mysql_provider` | Either `mariadb` or `mysql` | `mariadb` |
 | `mysql_service` | MySQL service name | `{{ __mysql_service }}` |
@@ -36,6 +35,9 @@ This role requires root access and should be run with `become=yes`.
 | `mysql_system_group` | MySQL system group | `{{ __mysql_system_group }}` |
 | `mysql_system_user` | MySQL system user | `{{ __mysql_system_user }}` |
 | `mysql_users` | The MySQL users and their privileges | `[]` |
+| `mysql_enabled_on_startup` | Enable mysql service | `true` |
+| `mysql_service_state` | Start mysql service after configuration | `started` |
+
 
 Most of the time `mysql_db_admin_user` is `root`, this is chosen by operating systems packagers and therefore should not be changed.
 
@@ -117,6 +119,7 @@ mysql_packages:
   - mysql-client
   - mysql-server
   - python3-pymysql
+mysql_service: mysql
 mysql_provider: mysql
 ```
 

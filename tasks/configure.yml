@@ -16,12 +16,7 @@
     mode: 0644
   notify: Restart mysql
 
-- name: Configure - Ensure MySQL is enabled on boot.
+- name: Configure - Ensure MySQL is enabled/disabled on boot.
   service:
     name: "{{ mysql_service }}"
-    enabled: yes
-
-- name: Configure - Ensure MySQL is started.
-  service:
-    name: "{{ mysql_service }}"
-    state: started
+    enabled: "{{ mysql_enabled_on_startup }}"

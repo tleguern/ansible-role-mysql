@@ -1,5 +1,5 @@
 ---
-__mysql_service: mysql
+__mysql_service: mariadb
 __mysql_packages:
   - mariadb-client
   - mariadb-server
