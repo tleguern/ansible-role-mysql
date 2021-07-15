@@ -10,6 +10,7 @@ mysql_service_state: started
 
 mysql_datadir: "{{ __mysql_datadir }}"
 mysql_packages: "{{ __mysql_packages }}"
+mysql_python_package: "{{ __mysql_python_package }}"
 mysql_service: "{{ __mysql_service }}"
 mysql_system_group: "{{ __mysql_system_group }}"
 mysql_system_user: "{{ __mysql_system_user }}"

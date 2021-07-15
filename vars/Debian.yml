@@ -3,6 +3,7 @@ __mysql_service: mariadb
 __mysql_packages:
   - mariadb-client
   - mariadb-server
+__mysql_python_package:
   - python3-pymysql
 __mysql_datadir: /var/lib/mysql
 __mysql_system_user: mysql

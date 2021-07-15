@@ -9,6 +9,11 @@
         group: "{{ __mysql_root_group }}"
         mode: 0644
 
+- name: Fedora - Ensure MySQL python package is installed.
+  dnf:
+    name: "{{ mysql_python_package }}"
+    state: present
+
 - name: Fedora - Ensure MySQL packages are installed.
   dnf:
     name: "{{ mysql_packages }}"

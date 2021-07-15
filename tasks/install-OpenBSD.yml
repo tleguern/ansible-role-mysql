@@ -9,6 +9,11 @@
         group: wheel
         mode: 0644
 
+- name: OpenBSD - Ensure MySQL python package is installed.
+  openbsd_pkg:
+    name: "{{ mysql_python_package }}"
+    state: present
+
 - name: OpenBSD - Ensure MySQL packages are installed.
   openbsd_pkg:
     name: "{{ mysql_packages }}"
