@@ -29,6 +29,7 @@ This role requires root access and should be run with `become=yes`.
 | `mysql_db_admin_password` | MySQL administrator password  | mandatory |
 | `mysql_db_admin_user` | MySQL default administrator account | `root` |
 | `mysql_packages` | A list of packages | `{{ __mysql_packages }}` |
+| `mysql_python_package` | Name of the python package used by Ansible | `{{ __mysql_python_package }}` |
 | `mysql_provider` | Either `mariadb` or `mysql` | `mariadb` |
 | `mysql_service` | MySQL service name | `{{ __mysql_service }}` |
 | `mysql_socket` | MySQL Unix domain socket used for connections | `{{ __mysql_socket }}` |
@@ -46,7 +47,8 @@ Most of the time `mysql_db_admin_user` is `root`, this is chosen by operating sy
 |----------|---------|
 | `__mysql_config_path` | `/etc/mysql/my.cnf` |
 | `__mysql_datadir` | `/var/lib/mysql` |
-| `__mysql_packages` | `[mariadb-client, mariadb-server, python3-pymysql]` |
+| `__mysql_packages` | `[mariadb-client, mariadb-server]` |
+| `__mysql_python_package` | `python3-pymysql` |
 | `__mysql_service` | `mysql` |
 | `__mysql_socket` | `/run/mysqld/mysqld.sock` |
 | `__mysql_system_group` | `mysql` |
@@ -58,7 +60,8 @@ Most of the time `mysql_db_admin_user` is `root`, this is chosen by operating sy
 |----------|---------|
 | `__mysql_config_path` | `/etc/my.cnf` |
 | `__mysql_datadir` | `/var/lib/mysql` |
-| `__mysql_packages` | `[mariadb, mariadb-server, python3-PyMySQL]` |
+| `__mysql_packages` | `[mariadb, mariadb-server]` |
+| `__mysql_python_package` | `python3-PyMySQL` |
 | `__mysql_service` | `mariadb` |
 | `__mysql_socket` | `/var/lib/mysql/mysql.sock` |
 | `__mysql_system_group` | `mysql` |
@@ -70,7 +73,8 @@ Most of the time `mysql_db_admin_user` is `root`, this is chosen by operating sy
 |----------|---------|
 | `__mysql_config_path` | `/etc/my.cnf` |
 | `__mysql_datadir` | `/var/mysql` |
-| `__mysql_packages` | `[mariadb-client, mariadb-server, py3-pymysql]` |
+| `__mysql_packages` | `[mariadb-client, mariadb-server]` |
+| `__mysql_python_package` | `py3-pymysql` |
 | `__mysql_service` | `mysqld` |
 | `__mysql_socket` | `/var/run/mysql/mysql.sock` |
 | `__mysql_system_group` | `_mysql` |
@@ -117,7 +121,6 @@ Then the following variables need to be overloaded from the default value:
 mysql_packages:
   - mysql-client
   - mysql-server
-  - python3-pymysql
 mysql_service: mysql
 mysql_provider: mysql
 ```
