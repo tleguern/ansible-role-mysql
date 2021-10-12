@@ -16,7 +16,7 @@
       service_facts:
 
     - name: Check that MySQL is not running.
-      assert: 
+      assert:
         that:
           - "(mysql_service + '.service') in hostvars[inventory_hostname]['services']"
           - hostvars[inventory_hostname]['services']['mariadb.service'].state == 'inactive'
