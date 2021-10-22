@@ -5,7 +5,7 @@ dependency:
     role-file: molecule/requirements.yml
     requirements-file: molecule/requirements.yml
 lint: |
-  yamllint-3 .
+  yamllint .
 driver:
   name: delegated
   options:
