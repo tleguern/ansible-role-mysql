@@ -1,5 +1,5 @@
 ---
-image: debian/buster
+image: debian/bullseye
 packages:
   - python3
   - python3-pip
