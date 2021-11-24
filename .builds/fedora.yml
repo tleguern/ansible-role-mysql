@@ -1,5 +1,5 @@
 ---
-image: fedora/33
+image: fedora/36
 packages:
   - python3
   - python3-pip
