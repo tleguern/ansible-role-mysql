@@ -1,10 +1,8 @@
 ---
 image: openbsd/7.0
 packages:
-  - python
   - py3-pip
   - py3-pymysql
-  - py3-wheel
   - py3-yamllint
   - ansible
 environment:
@@ -13,7 +11,7 @@ tasks:
   - init: |
       doas ln -sf /usr/local/bin/pip3.8 /usr/local/bin/pip
   - pip: |
-      pip install -q molecule==3.2.4
+      pip install -q molecule
   - molecule: |
       cd ansible-role-mysql
       molecule test -s openbsd
