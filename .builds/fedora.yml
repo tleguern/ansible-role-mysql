@@ -8,8 +8,6 @@ packages:
   - python3-setuptools
   - python3-dnf
   - yamllint
-sources:
-  - https://git.sr.ht/~tleguern/ansible-role-mysql
 environment:
   PATH: "/bin:/usr/bin/:/usr/local/bin:/home/build/.local/bin"
 tasks:

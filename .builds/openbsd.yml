@@ -7,8 +7,6 @@ packages:
   - py3-wheel
   - py3-yamllint
   - ansible
-sources:
-  - https://git.sr.ht/~tleguern/ansible-role-mysql
 environment:
   PATH: "/bin:/usr/bin/:/usr/local/bin:/home/build/.local/bin"
 tasks:
