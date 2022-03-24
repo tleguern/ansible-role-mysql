@@ -1,4 +1,36 @@
 ---
+- name: Debian - Ensure /etc/mysql/ exists.
+  file:
+    path: /etc/mysql
+    owner: root
+    group: root
+    mode: 0755
+    state: directory
+
+- name: "Debian - Ensure {{ mysql_config_path | dirname }} exists."
+  file:
+    path: "{{ mysql_config_path | dirname }}"
+    owner: root
+    group: root
+    mode: 0755
+    state: directory
+
+- name: Debian - Ensure /etc/mysql/conf.d exists.
+  file:
+    path: /etc/mysql/conf.d
+    owner: root
+    group: root
+    mode: 0755
+    state: directory
+
+- name: "Debian - Ensure {{ mysql_config_path }} is configured."
+  template:
+    src: my.cnf.j2
+    dest: "{{ mysql_config_path }}"
+    owner: root
+    group: root
+    mode: 0644
+
 - name: Debian - Ensure MySQL python package is installed.
   apt:
     name: "{{ mysql_python_package }}"
@@ -10,78 +42,36 @@
     state: present
   register: mysql_install_packages
 
+- name: Debian - Ensure alternatives point to mysql.cnf.
+  alternatives:
+    name: my.cnf
+    path: "/etc/mysql/{{ mysql_provider }}.cnf"
+
 - name: Debian - Post-installation.
   block:
-    - name: Debian - Ensure MySQL is stopped after initial install.
-      service:
-        name: "{{ mysql_service }}"
-        state: stopped
-
-    - name: Debian - Ensure /etc/mysql exists.
-      file:
-        path: "{{ mysql_config_path | dirname }}"
-        state: directory
-        owner: root
-        group: root
-
-    - name: Debian - Ensure /etc/mysql/my.cnf is configured.
-      template:
-        src: my.cnf.j2
-        dest: "{{ mysql_config_path }}"
-        owner: root
-        group: root
-        mode: 0644
-
-    - name: Debian - Find files in /var/lib/mysql.
-      find:
-        path: "{{ mysql_datadir }}"
-        recurse: yes
-        file_type: any
-      register: mysql_files_db
-
-    - name: Debian - Remove /var/lib/mysql content.
-      file:
-        path: "{{ item.path }}"
-        state: absent
-      loop: "{{ mysql_files_db.files }}"
-      loop_control:
-        label: "{{ item.path }}"
-
     - name: Debian - Remove existing /root/.my.cnf.
       file:
         path: /root/.my.cnf
         state: absent
 
-    - name: Debian - Recreate /var/lib/mysql.
-      file:
-        path: "{{ mysql_datadir }}"
-        state: directory
-        owner: "{{ mysql_system_user }}"
-        group: "{{ mysql_system_group }}"
-        mode: 0740
+    - when: mysql_provider == "mariadb"
+      block:
+        - name: Debian - Check if extra configuration files are present.
+          find:
+            paths:
+              - /etc/mysql/conf.d/
+              - /etc/mysql/mariadb.conf.d/
+          register: __mysql_extra_config_files
 
-    - name: Debian - Ensure MySQL database is correctly initialized (mariadb).
-      command: /usr/bin/mysql_install_db
-      when: mysql_provider == 'mariadb'
+        - name: Debian - Remove the extra confguration files.
+          file:
+            path: "{{ item }}"
+            state: absent
+          loop: "{{ __mysql_extra_config_files.files }}"
+          when: item.path != mysql_config_path
 
-    - name: Debian - Ensure MySQL database is correctly initialized (mysql).
-      command: |
-        mysqld --initialize-insecure \
-               --user={{ mysql_system_user }} \
-               --datadir={{ mysql_datadir }}
-      when: mysql_provider == 'mysql'
-
-    - name: Debian - Ensure /var/lib/mysql has correct rights
-      file:
-        path: /var/lib/mysql
-        state: directory
-        recurse: yes
-        owner: "{{ mysql_system_user }}"
-        group: "{{ mysql_system_group }}"
-
-    - name: Debian - Ensure MySQL is started.
+    - name: Debian - Ensure MySQL is restarted.
       service:
         name: "{{ mysql_service }}"
-        state: started
-
+        state: restarted
   when: mysql_install_packages.changed
