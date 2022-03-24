@@ -4,7 +4,7 @@
 
 Installs and configures MySQL or MariaDB on the following operating systems:
 
-- OpenBSD
+- OpenBSD (MariaDB only)
 - Debian
 - Fedora
 
@@ -43,42 +43,42 @@ Most of the time `mysql_db_admin_user` is `root`, this is chosen by operating sy
 
 ### Debian
 
-| Variable | Default |
-|----------|---------|
-| `__mysql_config_path` | `/etc/mysql/my.cnf` |
-| `__mysql_datadir` | `/var/lib/mysql` |
-| `__mysql_packages` | `[mariadb-client, mariadb-server]` |
-| `__mysql_python_package` | `python3-pymysql` |
-| `__mysql_service` | `mysql` |
-| `__mysql_socket` | `/run/mysqld/mysqld.sock` |
-| `__mysql_system_group` | `mysql` |
-| `__mysql_system_user` | `mysql` |
+| Variable                 | Default                            |
+|--------------------------|------------------------------------|
+| `__mysql_config_path`    | `/etc/mysql/{{ mysql_provider }}.conf.d/mysqld.cnf` |
+| `__mysql_datadir`        | `/var/lib/mysql`                   |
+| `__mysql_packages`       | `[mariadb-client, mariadb-server]` |
+| `__mysql_python_package` | `python3-pymysql`                  |
+| `__mysql_service`        | `mysql`                            |
+| `__mysql_socket`         | `/run/mysqld/mysqld.sock`          |
+| `__mysql_system_group`   | `mysql`                            |
+| `__mysql_system_user`    | `mysql`                            |
 
 ### Fedora
 
-| Variable | Default |
-|----------|---------|
-| `__mysql_config_path` | `/etc/my.cnf` |
-| `__mysql_datadir` | `/var/lib/mysql` |
-| `__mysql_packages` | `[mariadb, mariadb-server]` |
-| `__mysql_python_package` | `python3-PyMySQL` |
-| `__mysql_service` | `mariadb` |
-| `__mysql_socket` | `/var/lib/mysql/mysql.sock` |
-| `__mysql_system_group` | `mysql` |
-| `__mysql_system_user` | `mysql` |
+| Variable                 | Default                     |
+|--------------------------|-----------------------------|
+| `__mysql_config_path`    | `/etc/my.cnf`               |
+| `__mysql_datadir`        | `/var/lib/mysql`            |
+| `__mysql_packages`       | `[mariadb, mariadb-server]` |
+| `__mysql_python_package` | `python3-PyMySQL`           |
+| `__mysql_service`        | `mariadb`                   |
+| `__mysql_socket`         | `/var/lib/mysql/mysql.sock` |
+| `__mysql_system_group`   | `mysql`                     |
+| `__mysql_system_user`    | `mysql`                     |
 
 ### OpenBSD
 
-| Variable | Default |
-|----------|---------|
-| `__mysql_config_path` | `/etc/my.cnf` |
-| `__mysql_datadir` | `/var/mysql` |
-| `__mysql_packages` | `[mariadb-client, mariadb-server]` |
-| `__mysql_python_package` | `py3-pymysql` |
-| `__mysql_service` | `mysqld` |
-| `__mysql_socket` | `/var/run/mysql/mysql.sock` |
-| `__mysql_system_group` | `_mysql` |
-| `__mysql_system_user` | `_mysql` |
+| Variable                 | Default                            |
+|--------------------------|------------------------------------|
+| `__mysql_config_path`    | `/etc/my.cnf`                      |
+| `__mysql_datadir`        | `/var/mysql`                       |
+| `__mysql_packages`       | `[mariadb-client, mariadb-server]` |
+| `__mysql_python_package` | `py3-pymysql`                      |
+| `__mysql_service`        | `mysqld`                           |
+| `__mysql_socket`         | `/var/run/mysql/mysql.sock`        |
+| `__mysql_system_group`   | `_mysql`                           |
+| `__mysql_system_user`    | `_mysql`                           |
 
 ### `mysql_config`
 
@@ -106,12 +106,9 @@ mysql_config:
       syslog
 ```
 
-This configuration entirely replace the default installation provided by a system package manager such as Debian's APT.
-To emulate the split directories behaviour one should add an `!includedir` directive at the end of `mysql_config`.
-
 ### `mysql_provider`
 
-This variable is used to specify the provider for `mysql`: either MariaDB (the default on most operating systems now) or MySQL.
+This variable is used to specify the provider for `mysql`: either MariaDB (the default on most operating systems now) or Oracle's MySQL.
 
 If you want to install the later it is mandatory to configure your package repository in advance, perhaps with a `pre_tasks` in a playbook.
 Then the following variables need to be overloaded from the default value:
@@ -170,7 +167,7 @@ None.
     - mysql_databases:
         - name: app_db
   roles:
-    - role: ansible-role-mysql
+    - role: tleguern.mysql
 ```
 
 ## License
