@@ -29,7 +29,7 @@
 
     - name: Remove MySQL configuration.
       file:
-        path: "{{ mysql_config_path }}"
+        path: /etc/mysql
         state: absent
 
     - name: Remove root MySQL configuration.
