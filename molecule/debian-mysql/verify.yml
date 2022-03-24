@@ -10,6 +10,7 @@
       community.mysql.mysql_info:
         filter: databases,users
         return_empty_dbs: yes
+        login_unix_socket: /run/mysqld/mysqld.sock
       register: mu
     - name: Check the size of ibdata1
       stat:
