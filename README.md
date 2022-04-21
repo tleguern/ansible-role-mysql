@@ -37,7 +37,7 @@ This role requires root access and should be run with `become=yes`.
 | `mysql_system_user` | MySQL system user | `{{ __mysql_system_user }}` |
 | `mysql_users` | The MySQL users and their privileges | `[]` |
 | `mysql_enabled_on_startup` | Enable mysql service | `true` |
-| `mysql_service_state` | Start mysql service after configuration | `started` |
+| `mysql_service_state` | Expected state of mysql service after configuration | `started` or `restarted` depending on context |
 
 Most of the time `mysql_db_admin_user` is `root`, this is chosen by operating systems packagers and therefore should not be changed.
 

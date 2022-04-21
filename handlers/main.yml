@@ -2,5 +2,5 @@
 - name: Restart mysql
   service:
     name: "{{ mysql_service }}"
-    state: restarted
+    state: "{{ mysql_service_state | default('restarted') }}"
     sleep: 5

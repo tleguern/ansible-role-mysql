@@ -30,6 +30,7 @@
     owner: root
     group: root
     mode: 0644
+  notify: Restart mysql
 
 - name: Debian - Ensure MySQL python package is installed.
   apt:
