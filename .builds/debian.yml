@@ -11,7 +11,9 @@ tasks:
   - pip: |
       python3 -m pip install -qU pip
       pip install -q molecule
-  - molecule: |
+  - debian_mariadb: |
       cd ansible-role-mysql
       molecule test -s debian-mariadb
+  - debian_mariadb_nostart: |
+      cd ansible-role-mysql
       molecule test -s debian-mariadb-nostart

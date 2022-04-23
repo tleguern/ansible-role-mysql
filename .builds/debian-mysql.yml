@@ -13,6 +13,6 @@ tasks:
   - pip: |
       python3 -m pip install -qU pip
       pip install -q molecule
-  - molecule: |
+  - debian_mysql: |
       cd ansible-role-mysql
       molecule test -s debian-mysql

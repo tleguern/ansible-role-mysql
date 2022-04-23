@@ -12,6 +12,6 @@ tasks:
   - pip: |
       python3 -m pip install -qU pip
       python3 -m pip install -q molecule
-  - molecule: |
+  - fedora: |
       cd ansible-role-mysql
       molecule test -s fedora

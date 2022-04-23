@@ -12,7 +12,9 @@ tasks:
       doas ln -sf /usr/local/bin/pip3.8 /usr/local/bin/pip
   - pip: |
       pip install -q molecule
-  - molecule: |
+  - openbsd: |
       cd ansible-role-mysql
       molecule test -s openbsd
+  - openbsd_nostart: |
+      cd ansible-role-mysql
       molecule test -s openbsd-nostart
