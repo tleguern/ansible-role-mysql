@@ -1,0 +1,23 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  become: yes
+  become_user: root
+  become_method: doas
+  tasks:
+    - name: Load system variables.
+      include_vars: ../../vars/OpenBSD.yml
+
+    - name: Load default variables.
+      include_vars: ../../defaults/main.yml
+
+    - name: Gather service facts.
+      service_facts:
+
+    - name: Check that MySQL is not running.
+      assert:
+        that:
+          - "mysql_service in hostvars[inventory_hostname]['services']"
+          - hostvars[inventory_hostname]['services'][mysql_service].state == 'stopped'
+          - hostvars[inventory_hostname]['services'][mysql_service].status == 'disabled'

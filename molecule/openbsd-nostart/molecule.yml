@@ -4,8 +4,6 @@ dependency:
   options:
     role-file: molecule/requirements.yml
     requirements-file: molecule/requirements.yml
-lint: |
-  yamllint .
 driver:
   name: delegated
   options:
@@ -34,9 +32,6 @@ scenario:
     - cleanup
   test_sequence:
     - dependency
-    - lint
-    - syntax
     - converge
-    - idempotence
     - verify
     - cleanup

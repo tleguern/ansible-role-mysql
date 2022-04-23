@@ -4,40 +4,7 @@
   become: yes
   become_method: sudo
   tasks:
-    - name: Load system variables.
-      include_vars: ../../vars/Debian.yml
-
-    - name: Load default variables.
-      include_vars: ../../defaults/main.yml
-
-    - name: Disable MySQL.
-      service:
-        name: "{{ mysql_service }}"
-        enabled: no
-      ignore_errors: yes
-
-    - name: Stop MySQL.
-      service:
-        name: "{{ mysql_service }}"
-        state: stopped
-      ignore_errors: yes
-
-    - name: Uninstall MySQL.
-      package:
-        name: "{{ mysql_packages }}"
-        state: absent
-
-    - name: Remove MySQL configuration.
-      file:
-        path: "{{ mysql_config_path }}"
-        state: absent
-
-    - name: Remove root MySQL configuration.
-      file:
-        path: /root/.my.cnf
-        state: absent
-
-    - name: Remove MySQL data.
-      file:
-        path: "{{ mysql_datadir }}"
-        state: absent
+    - name: "Use tleguern.mysql purge.yml"
+      include_role:
+        name: "ansible-role-mysql"
+        tasks_from: purge.yml

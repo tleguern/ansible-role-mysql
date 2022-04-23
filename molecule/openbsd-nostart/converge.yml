@@ -1,0 +1,31 @@
+---
+- name: Converge
+  hosts: all
+  vars:
+    mysql_databases:
+      - name: appdata
+    mysql_users:
+      - name: appuser
+        password: apppassword
+    mysql_db_admin_password: adminpassword
+    mysql_config:
+      - name: client-server
+        content: |
+          socket={{ mysql_socket }}
+      - name: mysqld
+        content: |
+          bind-address=127.0.0.1
+          datadir={{ mysql_datadir }}
+          log-basename=mysqld
+          general-log=true
+          slow_query_log=true
+    mysql_service_state: stopped
+    mysql_enabled_on_startup: no
+  tasks:
+    - name: "Include tleguern.mysql"
+      include_role:
+        name: "ansible-role-mysql"
+        apply:
+          become: yes
+          become_user: root
+          become_method: doas

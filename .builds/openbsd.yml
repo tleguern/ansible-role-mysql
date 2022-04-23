@@ -15,3 +15,4 @@ tasks:
   - molecule: |
       cd ansible-role-mysql
       molecule test -s openbsd
+      molecule test -s openbsd-nostart
