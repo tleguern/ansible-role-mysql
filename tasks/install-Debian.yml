@@ -71,8 +71,9 @@
           loop: "{{ __mysql_extra_config_files.files }}"
           when: item.path != mysql_config_path
 
-    - name: Debian - Ensure MySQL is restarted.
+    - name: Debian - Ensure MySQL is started.
       service:
         name: "{{ mysql_service }}"
-        state: restarted
+        state: started
+
   when: mysql_install_packages.changed
