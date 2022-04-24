@@ -1,7 +1,6 @@
 ---
 __mysql_service: mysqld
 __mysql_packages:
-  - mariadb-client
   - mariadb-server
 __mysql_python_package:
   - py3-pymysql

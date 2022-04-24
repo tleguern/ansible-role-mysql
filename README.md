@@ -47,7 +47,7 @@ Most of the time `mysql_db_admin_user` is `root`, this is chosen by operating sy
 |--------------------------|------------------------------------|
 | `__mysql_config_path`    | `/etc/mysql/{{ mysql_provider }}.conf.d/mysqld.cnf` |
 | `__mysql_datadir`        | `/var/lib/mysql`                   |
-| `__mysql_packages`       | `[mariadb-client, mariadb-server]` |
+| `__mysql_packages`       | `[mariadb-server]` |
 | `__mysql_python_package` | `python3-pymysql`                  |
 | `__mysql_service`        | `mysql`                            |
 | `__mysql_socket`         | `/run/mysqld/mysqld.sock`          |
@@ -69,16 +69,16 @@ Most of the time `mysql_db_admin_user` is `root`, this is chosen by operating sy
 
 ### OpenBSD
 
-| Variable                 | Default                            |
-|--------------------------|------------------------------------|
-| `__mysql_config_path`    | `/etc/my.cnf`                      |
-| `__mysql_datadir`        | `/var/mysql`                       |
-| `__mysql_packages`       | `[mariadb-client, mariadb-server]` |
-| `__mysql_python_package` | `py3-pymysql`                      |
-| `__mysql_service`        | `mysqld`                           |
-| `__mysql_socket`         | `/var/run/mysql/mysql.sock`        |
-| `__mysql_system_group`   | `_mysql`                           |
-| `__mysql_system_user`    | `_mysql`                           |
+| Variable                 | Default                     |
+|--------------------------|-----------------------------|
+| `__mysql_config_path`    | `/etc/my.cnf`               |
+| `__mysql_datadir`        | `/var/mysql`                |
+| `__mysql_packages`       | `[mariadb-server]`          |
+| `__mysql_python_package` | `py3-pymysql`               |
+| `__mysql_service`        | `mysqld`                    |
+| `__mysql_socket`         | `/var/run/mysql/mysql.sock` |
+| `__mysql_system_group`   | `_mysql`                    |
+| `__mysql_system_user`    | `_mysql`                    |
 
 ### `mysql_config`
 
@@ -116,7 +116,6 @@ Then the following variables need to be overloaded from the default value:
 ```yaml
 # Assuming Debian Buster
 mysql_packages:
-  - mysql-client
   - mysql-server
 mysql_service: mysql
 mysql_provider: mysql
