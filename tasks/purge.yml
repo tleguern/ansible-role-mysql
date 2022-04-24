@@ -18,15 +18,26 @@
     state: stopped
   ignore_errors: yes
 
-- name: Uninstall MySQL.
-  package:
-    name: "{{ mysql_packages }}"
-    state: absent
+- name: This block should not be needed.
+  block:
+    - name: Uninstall MySQL.
+      package:
+        name: "{{ mysql_packages }}"
+        state: absent
 
-- name: Uninstall MySQL python packages.
-  package:
-    name: "{{ mysql_python_package }}"
+    - name: Uninstall MySQL python packages.
+      package:
+        name: "{{ mysql_python_package }}"
+        state: absent
+  when: ansible_distribution != "Debian"
+
+- name: Be sure Debian really removes the packages.
+  apt:
+    name: "{{ mysql_packages + mysql_python_package }}"
     state: absent
+    purge: yes
+    autoremove: yes
+  when: ansible_distribution == "Debian"
 
 - name: Remove MySQL configuration.
   file:
