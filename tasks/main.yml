@@ -9,6 +9,23 @@
 - name: Verify role's parameters.
   include_tasks: asserts.yml
 
+- name: Detection of a previous installation.
+  block:
+    - name: Check the state of any existing /etc/mysql/my.cnf.
+      stat:
+        path: /etc/mysql/my.cnf
+      register: __my_cnf
+
+    - name: Warn if /etc/mysql/my.cnf already exists.
+      fail:
+        msg: |
+          Warning: migration from previous installation detected,
+          /etc/mysql/my.cnf already exists.
+      when:
+        - __my_cnf.stat.exists
+        - __my_cnf.stat.isreg
+      ignore_errors: yes
+
 - name: Execute OS-specific tasks.
   include_tasks: install-{{ ansible_distribution }}.yml
 
