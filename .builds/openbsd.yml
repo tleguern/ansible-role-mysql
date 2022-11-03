@@ -1,15 +1,17 @@
 ---
-image: openbsd/7.0
+image: openbsd/7.1
 packages:
   - py3-pip
   - py3-pymysql
   - py3-yamllint
   - ansible
+sources:
+  - https://git.sr.ht/~tleguern/ansible-role-mysql
 environment:
   PATH: "/bin:/usr/bin/:/usr/local/bin:/home/build/.local/bin"
 tasks:
   - init: |
-      doas ln -sf /usr/local/bin/pip3.8 /usr/local/bin/pip
+      doas ln -sf /usr/local/bin/pip3.9 /usr/local/bin/pip
   - pip: |
       pip install -q molecule
   - openbsd: |

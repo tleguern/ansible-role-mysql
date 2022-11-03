@@ -1,11 +1,13 @@
 ---
-image: fedora/36
+image: fedora/37
 packages:
   - python3-pip
   - python3-PyMySQL
   - python3-dnf
   - ansible
   - yamllint
+sources:
+  - https://git.sr.ht/~tleguern/ansible-role-mysql
 environment:
   PATH: "/bin:/usr/bin/:/usr/local/bin:/home/build/.local/bin"
 tasks:
