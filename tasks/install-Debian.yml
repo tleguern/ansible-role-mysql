@@ -66,7 +66,7 @@
 
         - name: Debian - Remove the extra confguration files.
           file:
-            path: "{{ item }}"
+            path: "{{ item.path }}"
             state: absent
           loop: "{{ __mysql_extra_config_files.files }}"
           when: item.path != mysql_config_path
