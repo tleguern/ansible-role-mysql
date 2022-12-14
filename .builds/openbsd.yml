@@ -1,5 +1,5 @@
 ---
-image: openbsd/7.1
+image: openbsd/7.2
 packages:
   - py3-pip
   - py3-pymysql
