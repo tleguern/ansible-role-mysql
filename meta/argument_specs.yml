@@ -1,0 +1,158 @@
+---
+argument_specs:
+  main:
+    short_description: "Install and configure MySQL or MariaDB"
+    description: "This role aims to be more maintainable than geerlingguy.mysql while providing a small amount of compatibility."
+    author: Tristan Le Guern
+    options:
+      mysql_config_path:
+        description: "Path to MySQL configuration file, depend on the operating system."
+        type: str
+        required: no
+      mysql_config:
+        description: "MySQL configuration."
+        type: list
+        elements: dict
+        required: no
+        suboptions:
+          name:
+            description: "Name if the INI section"
+            type: str
+            required: yes
+          content:
+            description: "Raw content"
+            type: str
+            required: yes
+      mysql_databases:
+        type: list
+        elements: dict
+        default: []
+        required: no
+        description: "A list of MySQL databases."
+        suboptions:
+          name:
+            description: "Database name"
+            required: yes
+          collation:
+            description: "Database collation"
+            type: str
+            default: utf8_general_ci
+            required: no
+          encoding:
+            description: "Database encoding"
+            type: str
+            default: utf8
+            required: no
+          state:
+            description: "Should this database be present or absent?"
+            type: str
+            default: present
+            choice:
+              - present
+              - absent
+            required: no
+      mysql_datadir:
+        description: "Path to MySQL data directory, depend on the operating system."
+        type: str
+        required: no
+      mysql_db_admin_password_update:
+        description: "Whether to force update the MySQL root user's password."
+        type: bool
+        default: no
+      mysql_db_admin_password:
+        description: "MySQL administrator password."
+        required: yes
+        type: str
+      mysql_db_admin_user:
+        description: "MySQL default administrator account."
+        required: no
+        type: str
+        default: root
+      mysql_packages:
+        description: "List of necessary packages to install MySQL or MariaDB, depend on the operating system as well as the choice of database."
+        required: no
+        type: list
+        elements: str
+      mysql_python_package:
+        description: "List of necessary packages required by Ansible to work with MysSQL/MariaSB, depend on the operating system."
+        required: no
+        type: list
+        elements: str
+      mysql_provider:
+        description: "MySQL or MariaDB?"
+        required: no
+        default: mariadb
+        type: str
+        choices:
+          - mariadb
+          - mysql
+      mysql_service:
+        description: "MySQL service name. Depend on the operating system."
+        required: no
+        type: str
+      mysql_socket:
+        description: "MySQL Unix domain socket used for connections. Depend on the operating system."
+        required: no
+        type: str
+      mysql_system_group:
+        description: "MySQL system group. Depend on the operating system."
+        required: no
+        type: str
+      mysql_system_user:
+        description: "MySQL system user. Depend on the operating system."
+        required: no
+        type: str
+      mysql_users:
+        description: "MySQL users and their privileges."
+        required: no
+        type: list
+        elements: dict
+        default: []
+        suboptions:
+          name:
+            description: "User's name"
+            required: yes
+            type: str
+          host:
+            description: "Hosts the user is allowed to connect from"
+            required: no
+            default: localhost
+            type: str
+          password:
+            description: "User's password"
+            required: yes
+            type: str
+          priv:
+            description: "User's privileges"
+            type: str
+            default: "*.*:USAGE"
+            required: no
+          state:
+            description: "Should the user be present or absent?"
+            type: str
+            default: present
+            required: no
+            choices:
+              - present
+              - absent
+          append_privs:
+            description: "Append to the existing privileges or erase them?"
+            type: bool
+            default: no
+            required: no
+          encrypted:
+            type: bool
+            default: no
+            required: no
+      mysql_enabled_on_startup:
+        description: "Should the service be enabled or not?"
+        required: no
+        type: bool
+        default: yes
+      mysql_service_state:
+        description: "Should the service be configured in an initial started or stopped state? Useful for complicated cluster setup with a managing tool."
+        required: no
+        type: str
+        choices:
+          - started
+          - stopped
