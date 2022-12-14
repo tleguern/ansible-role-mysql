@@ -9,7 +9,7 @@ Installs and configures MySQL or MariaDB on the following operating systems:
 - Fedora
 
 This role is originally based on Jeff Geerling's with an emphasis on better portability (ie: Non-Linux unixen) and simplicity.
-It is therefore not entirely compatible as some variables were renamed to prevent misunderstanding and the replication parameters have been excised and left to another role.
+It is therefore not entirely compatible as some variables were renamed to prevent misunderstanding and the replication parameters have been excised and left to another role (for example [this one](https://github.com/Deveryware/ansible-role-mysql-replication)).
 
 Automatic testing is provided using molecule's delegated driver and <https://builds.sr.ht>.
 
