@@ -7,14 +7,14 @@ mysql_users: []
 mysql_provider: mariadb
 mysql_enabled_on_startup: yes
 
-mysql_datadir: "{{ __mysql_datadir }}"
-mysql_packages: "{{ __mysql_packages }}"
-mysql_python_package: "{{ __mysql_python_package }}"
-mysql_service: "{{ __mysql_service }}"
-mysql_system_group: "{{ __mysql_system_group }}"
-mysql_system_user: "{{ __mysql_system_user }}"
-mysql_config_path: "{{ __mysql_config_path }}"
-mysql_config: "{{ __mysql_system_config }}"
-mysql_socket: "{{ __mysql_socket }}"
+mysql_datadir: "{{ __mysql_datadir | default('dummy') }}"
+mysql_packages: "{{ __mysql_packages | default('dummy') }}"
+mysql_python_package: "{{ __mysql_python_package | default('dummy') }}"
+mysql_service: "{{ __mysql_service | default('dummy') }}"
+mysql_system_group: "{{ __mysql_system_group | default('dummy') }}"
+mysql_system_user: "{{ __mysql_system_user | default('dummy') }}"
+mysql_config_path: "{{ __mysql_config_path | default('dummy') }}"
+mysql_config: "{{ __mysql_system_config | default('dummy') }}"
+mysql_socket: "{{ __mysql_socket | default('dummy') }}"
 
 __mysql_providers: [ 'mariadb', 'mysql' ]
