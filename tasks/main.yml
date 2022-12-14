@@ -8,6 +8,9 @@
 
 - name: Verify role's parameters.
   include_tasks: asserts.yml
+  when:
+    - ansible_version.major <= 2
+    - ansible_version.minor < 11
 
 - name: Detection of a previous installation.
   block:
