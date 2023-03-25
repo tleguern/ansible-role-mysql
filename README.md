@@ -22,7 +22,7 @@ This role requires root access and should be run with `become=yes`.
 | Variable | Description | Default |
 |----------|-------------|---------|
 | `mysql_config_path` | Path of the main configuration file | `{{ __mysql_config_path }}` |
-| `mysql_config` | Extra configuration rules for my.cnf. See bellow. | `[]` |
+| `mysql_config` | Extra configuration rules for my.cnf. See bellow. | `{}` |
 | `mysql_databases` | The MySQL databases to create | `[]` |
 | `mysql_datadir` | Directory where MySQL data are stored | `{{ __mysql_datadir }}` |
 | `mysql_db_admin_password_update` | Whether to force update the MySQL root user's password | `false` |
@@ -82,7 +82,17 @@ Most of the time `mysql_db_admin_user` is `root`, this is chosen by operating sy
 
 ### `mysql_config`
 
-`mysql_config` is a simple representation of my.cnf in YAML as a list of hashes containing only the INI section name and its content.
+`mysql_config` is a YAML representation of mysql INI format.
+
+```yaml
+mysql_config:
+  section:
+    option: value
+    duplicate_option:
+      - value1
+      - value2
+```
+
 User provided values are combined with eventual system specific ones from this role.
 
 Example:
@@ -90,20 +100,20 @@ Example:
 ```yaml
 mysql_socket: /var/www/var/run/mysql/mysql.sock
 mysql_config:
-  - name: client-server
-    content: |
-      socket={{ mysql_socket }}
-      port=3306
-  - name: mysqld
-    content: |
-      bind-address=127.0.0.1
-      datadir={{ mysql_datadir }}
-      log-basename=mysqld
-      general-log
-      slow_query_log
-  - name: mysqld_safe
-    content: |
-      syslog
+  client-server:
+    socket: "{{ mysql_socket }}"
+    port: 3306
+  mysqld:
+    bind-address: 127.0.0.1
+    datadir: "{{ mysql_datadir }}"
+    log-basename: mysqld
+    replicate_ignore_db:
+      - mysql
+      - tmpdb
+    general-log:
+    slow_query_log: true
+  mysqld_safe:
+    syslog:
 ```
 
 ### `mysql_provider`
