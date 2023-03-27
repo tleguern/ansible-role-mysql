@@ -14,4 +14,4 @@ __mysql_root_user: root
 __mysql_root_group: root
 __mysql_root_home: /root
 
-__mysql_system_config: []
+__mysql_system_config: {}

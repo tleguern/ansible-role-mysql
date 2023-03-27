@@ -9,16 +9,14 @@
         password: apppassword
     mysql_db_admin_password: adminpassword
     mysql_config:
-      - name: client-server
-        content: |
-          socket={{ mysql_socket }}
-      - name: mysqld
-        content: |
-          bind-address=127.0.0.1
-          datadir={{ mysql_datadir }}
-          log-basename=mysqld
-          general-log=true
-          slow_query_log=true
+      client-server:
+        socket: "{{ mysql_socket }}"
+      mysqld:
+        bind-address: 127.0.0.1
+        datadir: "{{ mysql_datadir }}"
+        log-basename: mysqld
+        general-log: true
+        slow_query_log: true
     mysql_service_state: stopped
     mysql_enabled_on_startup: no
   tasks:
