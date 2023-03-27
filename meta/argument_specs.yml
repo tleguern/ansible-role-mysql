@@ -11,18 +11,9 @@ argument_specs:
         required: no
       mysql_config:
         description: "MySQL configuration."
-        type: list
+        type: dict
         elements: dict
         required: no
-        suboptions:
-          name:
-            description: "Name if the INI section"
-            type: str
-            required: yes
-          content:
-            description: "Raw content"
-            type: str
-            required: yes
       mysql_databases:
         type: list
         elements: dict
