@@ -17,6 +17,10 @@ Automatic testing is provided using molecule's delegated driver and <https://bui
 
 This role requires root access and should be run with `become=yes`.
 
+## Dependencies
+
+collection community.mysql >= 3.1.0 (included in ansible >= 6.x)
+
 ## Role Variables
 
 | Variable | Description | Default |
