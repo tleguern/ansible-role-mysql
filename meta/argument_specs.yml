@@ -12,7 +12,6 @@ argument_specs:
       mysql_config:
         description: "MySQL configuration."
         type: dict
-        elements: dict
         required: no
       mysql_databases:
         type: list
