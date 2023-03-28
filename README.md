@@ -84,15 +84,6 @@ Most of the time `mysql_db_admin_user` is `root`, this is chosen by operating sy
 
 `mysql_config` is a YAML representation of mysql INI format.
 
-```yaml
-mysql_config:
-  section:
-    option: value
-    duplicate_option:
-      - value1
-      - value2
-```
-
 User provided values are combined with eventual system specific ones from this role.
 
 Example:
