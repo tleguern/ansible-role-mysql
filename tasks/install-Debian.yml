@@ -46,6 +46,7 @@
 - name: Debian - Ensure alternatives point to mysql.cnf.
   alternatives:
     name: my.cnf
+    link: "/etc/mysql/mysql.cnf"
     path: "/etc/mysql/{{ mysql_provider }}.cnf"
 
 - name: Debian - Post-installation.
