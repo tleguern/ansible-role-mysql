@@ -1,0 +1,10 @@
+---
+- name: Converge
+  hosts: all
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: "Use tleguern.mysql purge.yml"
+      include_role:
+        name: "ansible-role-mysql"
+        tasks_from: purge.yml

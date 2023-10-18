@@ -1,5 +1,5 @@
 ---
-image: debian/bullseye
+image: ubuntu/lts
 packages:
   - python3-pip
   - python3-pymysql
@@ -9,12 +9,10 @@ sources:
   - https://git.sr.ht/~tleguern/ansible-role-mysql
 environment:
   PATH: "/bin:/usr/bin/:/usr/local/bin:/home/build/.local/bin"
-repositories:
-  mysql: http://repo.mysql.com/apt/debian bullseye mysql-8.0 467B942D3A79BD29
 tasks:
   - pip: |
       python3 -m pip install -qU pip
       pip install -q molecule
-  - debian_mysql: |
+  - debian_mariadb: |
       cd ansible-role-mysql
-      molecule test -s debian-mysql
+      molecule test -s debian-mariadb

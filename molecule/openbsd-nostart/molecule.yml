@@ -5,7 +5,7 @@ dependency:
     role-file: molecule/requirements.yml
     requirements-file: molecule/requirements.yml
 driver:
-  name: delegated
+  name: default
   options:
     managed: false
     ansible_connection_options:

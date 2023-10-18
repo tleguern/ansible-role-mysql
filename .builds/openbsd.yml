@@ -1,17 +1,18 @@
 ---
-image: openbsd/7.2
+image: openbsd/latest
 packages:
   - py3-pip
   - py3-pymysql
   - py3-yamllint
   - ansible
+  - rust # Groan
 sources:
   - https://git.sr.ht/~tleguern/ansible-role-mysql
 environment:
   PATH: "/bin:/usr/bin/:/usr/local/bin:/home/build/.local/bin"
 tasks:
   - init: |
-      doas ln -sf /usr/local/bin/pip3.9 /usr/local/bin/pip
+      doas ln -sf /usr/local/bin/pip3.10 /usr/local/bin/pip
   - pip: |
       pip install -q molecule
   - openbsd: |
