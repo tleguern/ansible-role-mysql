@@ -184,6 +184,4 @@ Either send [send GitHub pull requests](https://github.com/tleguern/ansible-role
 
 ## Author Information
 
-This role was created in 2014 by [Jeff Geerling](https://www.jeffgeerling.com/), author of [Ansible for DevOps](https://www.ansiblefordevops.com/).
-
-Additional work by Tristan Le Guern <tleguern@bouledef.eu>.
+This role was created in 2021 by [Tristan Le Guern](https://www.bouledef.eu/~tleguern) <tleguern@bouledef.eu> on top of [Jeff Geerling](https://www.jeffgeerling.com/)'s own Ansible role.
