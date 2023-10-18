@@ -1,0 +1,3 @@
+---
+- name: Recycle Debian installation.
+  include_tasks: install-Debian.yml

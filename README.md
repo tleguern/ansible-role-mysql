@@ -6,6 +6,7 @@ Installs and configures MySQL or MariaDB on the following operating systems:
 
 - OpenBSD (MariaDB only)
 - Debian
+- Ubuntu
 - Fedora
 
 This role is originally based on Jeff Geerling's with an emphasis on better portability (ie: Non-Linux unixen) and simplicity.
@@ -45,7 +46,7 @@ collection community.mysql >= 3.1.0 (included in ansible >= 6.x)
 
 Most of the time `mysql_db_admin_user` is `root`, this is chosen by operating systems packagers and therefore should not be changed.
 
-### Debian
+### Debian / Ubuntu
 
 | Variable                 | Default                            |
 |--------------------------|------------------------------------|

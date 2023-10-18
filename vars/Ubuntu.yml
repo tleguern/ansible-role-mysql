@@ -14,6 +14,6 @@ __mysql_root_user: root
 __mysql_root_group: root
 __mysql_root_home: /root
 
-__mysql_os_name: Debian
+__mysql_os_name: Ubuntu
 
 __mysql_system_config: []
