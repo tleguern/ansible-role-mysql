@@ -16,18 +16,15 @@ __mysql_root_home: /root
 
 # Provide a sane base as MySQL is not configured by default on OpenBSD
 __mysql_system_config:
-  - name: client-server
-    content: |
-      socket={{ __mysql_socket }}
-      port=3306
-  - name: client
-  - name: mysqld
-    content: |
-      bind-address=127.0.0.1
-      datadir=/var/mysql
-      log-basename=mysqld
-      general-log=true
-      slow_query_log=true
-  - name: mysqld_safe
-    content: |
-      syslog=true
+  client-server:
+      socket: {{ __mysql_socket }}
+      port: 3306
+  client:
+  mysqld:
+    bind-address: 127.0.0.1
+    datadir: /var/mysql
+    log-basename: mysqld
+    general-log: true
+    slow_query_log: true
+  mysqld_safe:
+    syslog: true

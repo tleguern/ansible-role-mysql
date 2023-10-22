@@ -1,9 +1,18 @@
 {{ ansible_managed | comment }}
 
-{% for section in mysql_config %}
-[{{ section.name }}]
-{% if section.content is defined and section.content != "" %}
-{{ section.content }}
+{% for section, options in mysql_config.items() %}
+[{{ section }}]
+{% for k, v in options.items() %}
+{% if v is iterable and v is not string %}
+{% for i in v %}
+{{ k }} = {{ i }}
+{% endfor %}
+{% elif v is boolean %}
+{{ k }} = {{ v | ternary('ON', 'OFF') }}
+{% elif v is not none %}
+{{ k }} = {{ v }}
+{% else %}
+{{ k }}
 {% endif %}
-
+{% endfor %}
 {% endfor %}
