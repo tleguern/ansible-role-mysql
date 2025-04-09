@@ -1,18 +1,18 @@
 ---
 - name: Secure Installation - Ensure remote login is disabled for admin account.
-  command: 'mysql -NBe "{{ item }}"'
+  ansible.builtin.command: 'mysql -NBe "{{ item }}"'
   loop:
     - DELETE FROM mysql.user WHERE User='{{ mysql_db_admin_user }}' AND Host NOT IN ('localhost', '127.0.0.1', '::1')
   changed_when: false
 
 - name: Secure Installation - Get list of hosts for the anonymous user.
-  command: mysql -NBe 'SELECT Host FROM mysql.user WHERE User = ""'
+  ansible.builtin.command: mysql -NBe 'SELECT Host FROM mysql.user WHERE User = ""'
   register: mysql_anonymous_hosts
   changed_when: false
   check_mode: false
 
 - name: Secure Installation - Ensure anonymous MySQL users are removed.
-  mysql_user:
+  community.mysql.mysql_user:
     name: ""
     host: "{{ item }}"
     state: absent
@@ -20,7 +20,7 @@
   loop: "{{ mysql_anonymous_hosts.stdout_lines|default([]) }}"
 
 - name: Secure Installation - Remove MySQL test database.
-  mysql_db:
+  community.mysql.mysql_db:
     name: 'test'
     state: absent
     login_unix_socket: "{{ mysql_socket }}"

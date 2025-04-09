@@ -1,6 +1,6 @@
 ---
 - name: "{{ __mysql_os_name }} - Ensure /etc/mysql/ exists."
-  file:
+  ansible.builtin.file:
     path: /etc/mysql
     owner: root
     group: root
@@ -8,7 +8,7 @@
     state: directory
 
 - name: "{{ __mysql_os_name }} - Ensure {{ mysql_config_path | dirname }} exists."
-  file:
+  ansible.builtin.file:
     path: "{{ mysql_config_path | dirname }}"
     owner: root
     group: root
@@ -16,7 +16,7 @@
     state: directory
 
 - name: "{{ __mysql_os_name }} - Ensure /etc/mysql/conf.d exists."
-  file:
+  ansible.builtin.file:
     path: /etc/mysql/conf.d
     owner: root
     group: root
@@ -24,7 +24,7 @@
     state: directory
 
 - name: "{{ __mysql_os_name }} - Ensure {{ mysql_config_path }} is configured."
-  template:
+  ansible.builtin.template:
     src: my.cnf.j2
     dest: "{{ mysql_config_path }}"
     owner: root
@@ -33,46 +33,46 @@
   notify: Restart mysql
 
 - name: "{{ __mysql_os_name }} - Ensure MySQL python package is installed."
-  apt:
+  ansible.builtin.apt:
     name: "{{ mysql_python_package }}"
     state: present
 
 - name: "{{ __mysql_os_name }} - Ensure MySQL packages are installed."
-  apt:
+  ansible.builtin.apt:
     name: "{{ mysql_packages }}"
     state: present
   register: mysql_install_packages
 
 - name: "{{ __mysql_os_name }} - Ensure alternatives point to mysql.cnf."
-  alternatives:
+  community.general.alternatives:
     name: my.cnf
     path: "/etc/mysql/{{ mysql_provider }}.cnf"
 
 - name: "{{ __mysql_os_name }} - Post-installation."
   block:
     - name: "{{ __mysql_os_name }} - Remove existing /root/.my.cnf."
-      file:
+      ansible.builtin.file:
         path: /root/.my.cnf
         state: absent
 
     - when: mysql_provider == "mariadb"
       block:
         - name: "{{ __mysql_os_name }} - Check if extra configuration files are present."
-          find:
+          ansible.builtin.find:
             paths:
               - /etc/mysql/conf.d/
               - /etc/mysql/mariadb.conf.d/
           register: __mysql_extra_config_files
 
         - name: "{{ __mysql_os_name }} - Remove the extra confguration files."
-          file:
+          ansible.builtin.file:
             path: "{{ item.path }}"
             state: absent
           loop: "{{ __mysql_extra_config_files.files }}"
           when: item.path != mysql_config_path
 
     - name: "{{ __mysql_os_name }} - Ensure MySQL is started."
-      service:
+      ansible.builtin.service:
         name: "{{ mysql_service }}"
         state: started
 

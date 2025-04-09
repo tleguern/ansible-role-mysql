@@ -1,6 +1,6 @@
 ---
 - name: Configure - Ensure datadir exists.
-  file:
+  ansible.builtin.file:
     path: "{{ mysql_datadir }}"
     state: directory
     owner: "{{ mysql_system_user }}"
@@ -8,7 +8,7 @@
     mode: 0700
 
 - name: Configure - Ensure MySQL is configured.
-  template:
+  ansible.builtin.template:
     src: my.cnf.j2
     dest: "{{ mysql_config_path }}"
     owner: "{{ __mysql_root_user }}"
@@ -17,6 +17,6 @@
   notify: Restart mysql
 
 - name: Configure - Ensure MySQL is enabled/disabled on boot.
-  service:
+  ansible.builtin.service:
     name: "{{ mysql_service }}"
     enabled: "{{ mysql_enabled_on_startup }}"
