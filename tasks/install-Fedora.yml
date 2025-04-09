@@ -13,12 +13,15 @@
   ansible.builtin.dnf:
     name: "{{ mysql_python_package }}"
     state: present
+  when: mysql_install_packages
 
 - name: Fedora - Ensure MySQL packages are installed.
   ansible.builtin.dnf:
     name: "{{ mysql_packages }}"
     state: present
-  register: mysql_install_packages
+  register: mysql_installed_packages
+  when: mysql_install_packages
+
 
 - name: Fedora - Post-installation.
   block:
@@ -47,4 +50,4 @@
         name: "{{ mysql_service }}"
         state: started
 
-  when: mysql_install_packages.changed
+    when: mysql_installed_packages and mysql_installed_packages.changed
