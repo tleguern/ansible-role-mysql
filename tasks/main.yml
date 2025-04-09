@@ -15,12 +15,12 @@
 - name: Detection of a previous installation.
   block:
     - name: Check the state of any existing /etc/mysql/my.cnf.
-      stat:
+      ansible.builtin.stat:
         path: /etc/mysql/my.cnf
       register: __my_cnf
 
     - name: Warn if /etc/mysql/my.cnf already exists.
-      fail:
+      ansible.builtin.fail:
         msg: |
           Warning: migration from previous installation detected,
           /etc/mysql/my.cnf already exists.
@@ -41,6 +41,6 @@
 - include_tasks: users.yml
 
 - name: Ensure MySQL is in the correct state.
-  service:
+  ansible.builtin.service:
     name: "{{ mysql_service }}"
     state: "{{ mysql_service_state | default('started') }}"
