@@ -14,6 +14,8 @@ tasks:
   - pip: |
       python3 -m pip install -qU pip
       python3 -m pip install -q molecule
+  - rename: |
+      mv ansible-role-mysql tleguern.mysql
   - fedora: |
-      cd ansible-role-mysql
+      cd tleguern.mysql
       molecule test -s fedora

@@ -15,12 +15,14 @@ tasks:
   - pip: |
       python3 -m pip install -qU pip
       pip install -q molecule
+  - rename: |
+      mv ansible-role-mysql tleguern.mysql
   - debian_mariadb: |
-      cd ansible-role-mysql
+      cd tleguern.mysql
       molecule test -s debian-mariadb
   - debian_mariadb_nostart: |
-      cd ansible-role-mysql
+      cd tleguern.mysql
       molecule test -s debian-mariadb-nostart
   - debian_mysql: |
-      cd ansible-role-mysql
+      cd tleguern.mysql
       molecule test -s debian-mysql

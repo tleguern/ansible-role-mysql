@@ -15,9 +15,11 @@ tasks:
       doas ln -sf /usr/local/bin/pip3.10 /usr/local/bin/pip
   - pip: |
       pip install -q molecule
+  - rename: |
+      mv ansible-role-mysql tleguern.mysql
   - openbsd: |
-      cd ansible-role-mysql
+      cd tleguern.mysql
       molecule test -s openbsd
   - openbsd_nostart: |
-      cd ansible-role-mysql
+      cd tleguern.mysql
       molecule test -s openbsd-nostart
