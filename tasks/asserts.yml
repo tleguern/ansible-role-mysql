@@ -2,13 +2,13 @@
 - name: mysql_databases
   block:
     - name: Ensure mysql_databases is iterable.
-      assert:
+      ansible.builtin.assert:
         that: "mysql_databases is iterable"
         fail_msg: "mysql_databases must be an iterable."
         quiet: yes
 
     - name: Ensure mysql_databases is correctly defined.
-      assert:
+      ansible.builtin.assert:
         that: item.name is defined
         fail_msg: "Items in mysql_databases must have key name."
         quiet: yes
@@ -16,19 +16,19 @@
       when: mysql_databases != []
 
 - name: Ensure mysql_db_admin_password_update is a boolean.
-  assert:
+  ansible.builtin.assert:
     that: "mysql_db_admin_password_update is boolean"
     fail_msg: "mysql_db_admin_password_update must be a boolean."
     quiet: yes
 
 - name: Ensure mysql_db_admin_password is defined.
-  assert:
+  ansible.builtin.assert:
     that: "__mysql_db_admin_password is defined"
     fail_msg: "Defining mysql_db_admin_password is mandatory."
     quiet: yes
 
 - name: Ensure mysql_provider is correctly defined.
-  assert:
+  ansible.builtin.assert:
     that: "mysql_provider in __mysql_providers"
     fail_msg: "mysql_provider must be either mysql or mariadb, not {{ mysql_provider }}."
     quiet: yes
@@ -36,13 +36,13 @@
 - name: mysql_users
   block:
     - name: Ensure mysql_users is iterable.
-      assert:
+      ansible.builtin.assert:
         that: "mysql_users is iterable"
         fail_msg: "mysql_users must be an iterable."
         quiet: yes
 
     - name: Ensure mysql_users is correctly defined.
-      assert:
+      ansible.builtin.assert:
         that:
           - item.name is defined
           - item.password is defined

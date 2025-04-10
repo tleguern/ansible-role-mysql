@@ -15,12 +15,12 @@
 - name: Detection of a previous installation.
   block:
     - name: Check the state of any existing /etc/mysql/my.cnf.
-      stat:
+      ansible.builtin.stat:
         path: /etc/mysql/my.cnf
       register: __my_cnf
 
     - name: Warn if /etc/mysql/my.cnf already exists.
-      fail:
+      ansible.builtin.fail:
         msg: |
           Warning: migration from previous installation detected,
           /etc/mysql/my.cnf already exists.
@@ -32,15 +32,20 @@
 - name: Execute OS-specific tasks.
   include_tasks: install-{{ ansible_distribution }}.yml
 
-- include_tasks: configure.yml
-- include_tasks: password-change.yml
+- name: Include tasks configure.
+  include_tasks: configure.yml
+- name: Include tasks password change.
+  include_tasks: password-change.yml
   when: mysql_install_packages.changed or mysql_db_admin_password_update
-- include_tasks: secure-installation.yml
+- name: Include tasks secure-installation.
+  include_tasks: secure-installation.yml
   when: mysql_install_packages.changed
-- include_tasks: databases.yml
-- include_tasks: users.yml
+- name: Include tasks databases.
+  include_tasks: databases.yml
+- name: Include tasks users.
+  include_tasks: users.yml
 
 - name: Ensure MySQL is in the correct state.
-  service:
+  ansible.builtin.service:
     name: "{{ mysql_service }}"
     state: "{{ mysql_service_state | default('started') }}"

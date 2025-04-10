@@ -13,7 +13,7 @@
   ignore_errors: yes
 
 - name: Stop MySQL.
-  service:
+  ansible.builtin.service:
     name: "{{ mysql_service }}"
     state: stopped
   ignore_errors: yes
@@ -21,18 +21,18 @@
 - name: This block should not be needed.
   block:
     - name: Uninstall MySQL.
-      package:
+      ansible.builtin.package:
         name: "{{ mysql_packages }}"
         state: absent
 
     - name: Uninstall MySQL python packages.
-      package:
+      ansible.builtin.package:
         name: "{{ mysql_python_package }}"
         state: absent
   when: ansible_distribution != "Debian"
 
 - name: Be sure Debian really removes the packages.
-  apt:
+  ansible.builtin.apt:
     name: "{{ mysql_packages + mysql_python_package }}"
     state: absent
     purge: yes
@@ -40,16 +40,16 @@
   when: ansible_distribution == "Debian"
 
 - name: Remove MySQL configuration.
-  file:
+  ansible.builtin.file:
     path: "{{ mysql_config_path }}"
     state: absent
 
 - name: Remove root MySQL configuration.
-  file:
+  ansible.builtin.file:
     path: /root/.my.cnf
     state: absent
 
 - name: Remove MySQL data.
-  file:
+  ansible.builtin.file:
     path: "{{ mysql_datadir }}"
     state: absent

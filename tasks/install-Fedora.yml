@@ -2,7 +2,7 @@
 - name: Fedora - Pre-installation.
   block:
     - name: Fedora - Ensure /etc/my.cnf is configured.
-      template:
+      ansible.builtin.template:
         src: my.cnf.j2
         dest: "{{ mysql_config_path }}"
         owner: "{{ __mysql_root_user }}"
@@ -10,12 +10,12 @@
         mode: 0644
 
 - name: Fedora - Ensure MySQL python package is installed.
-  dnf:
+  ansible.builtin.dnf:
     name: "{{ mysql_python_package }}"
     state: present
 
 - name: Fedora - Ensure MySQL packages are installed.
-  dnf:
+  ansible.builtin.dnf:
     name: "{{ mysql_packages }}"
     state: present
   register: mysql_install_packages
@@ -23,18 +23,18 @@
 - name: Fedora - Post-installation.
   block:
     - name: Fedora - Ensure MySQL database is correctly initialized (mariadb).
-      command: /usr/bin/mysql_install_db
+      ansible.builtin.command: /usr/bin/mysql_install_db
       when: mysql_provider == 'mariadb'
 
     - name: Fedora - Ensure MySQL database is correctly initialized (mysql).
-      command: |
+      ansible.builtin.command: |
         mysqld --initialize-insecure \
                --user={{ mysql_system_user }} \
                --datadir={{ mysql_datadir }}
       when: mysql_provider == 'mysql'
 
     - name: Fedora - Ensure /var/lib/mysql has correct rights.
-      file:
+      ansible.builtin.file:
         path: /var/lib/mysql
         state: directory
         recurse: yes
@@ -43,7 +43,7 @@
         mode: 0700
 
     - name: Fedora - Ensure MySQL is started.
-      service:
+      ansible.builtin.service:
         name: "{{ mysql_service }}"
         state: started
 
