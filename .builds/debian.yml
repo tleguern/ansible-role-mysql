@@ -10,7 +10,7 @@ sources:
 environment:
   PATH: "/bin:/usr/bin/:/usr/local/bin:/home/build/.local/bin"
 repositories:
-  mysql: http://repo.mysql.com/apt/debian bullseye mysql-8.0 467B942D3A79BD29
+  mysql: http://repo.mysql.com/apt/debian bullseye mysql-8.0 B7B3B788A8D3785C
 tasks:
   - pip: |
       python3 -m pip install -qU pip
