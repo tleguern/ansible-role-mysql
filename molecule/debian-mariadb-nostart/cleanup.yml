@@ -6,5 +6,5 @@
   tasks:
     - name: "Use tleguern.mysql purge.yml"
       include_role:
-        name: "ansible-role-mysql"
+        name: tleguern.mysql
         tasks_from: purge.yml
