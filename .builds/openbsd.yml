@@ -11,15 +11,14 @@ sources:
 environment:
   PATH: "/bin:/usr/bin/:/usr/local/bin:/home/build/.local/bin"
 tasks:
-  - init: |
-      doas ln -sf /usr/local/bin/pip3.10 /usr/local/bin/pip
   - pip: |
-      pip install -q molecule
+      python3 -m venv venv
+      ./venv/bin/pip3 install -q molecule
   - rename: |
       mv ansible-role-mysql tleguern.mysql
   - openbsd: |
       cd tleguern.mysql
-      molecule test -s openbsd
+      ../venv/bin/molecule test -s openbsd
   - openbsd_nostart: |
       cd tleguern.mysql
-      molecule test -s openbsd-nostart
+      ../venv/bin/molecule test -s openbsd-nostart
