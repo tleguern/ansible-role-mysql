@@ -33,17 +33,17 @@ collection community.mysql >= 3.1.0 (included in ansible >= 6.x)
 | `mysql_db_admin_password_update` | Whether to force update the MySQL root user's password | `false` |
 | `mysql_db_admin_password` | MySQL administrator password  | mandatory |
 | `mysql_db_admin_user` | MySQL default administrator account | `root` |
+| `mysql_enabled_on_startup` | Enable mysql service | `true` |
+| `mysql_install_packages` |  Whether or not to install the packages. | `yes` |
 | `mysql_packages` | A list of packages | `{{ __mysql_packages }}` |
-| `mysql_python_package` | Name of the python package used by Ansible | `{{ __mysql_python_package }}` |
 | `mysql_provider` | Either `mariadb` or `mysql` | `mariadb` |
+| `mysql_python_package` | Name of the python package used by Ansible | `{{ __mysql_python_package }}` |
+| `mysql_service_state` | Expected state of mysql service after configuration | `started` |
 | `mysql_service` | MySQL service name | `{{ __mysql_service }}` |
 | `mysql_socket` | MySQL Unix domain socket used for connections | `{{ __mysql_socket }}` |
 | `mysql_system_group` | MySQL system group | `{{ __mysql_system_group }}` |
 | `mysql_system_user` | MySQL system user | `{{ __mysql_system_user }}` |
 | `mysql_users` | The MySQL users and their privileges | `[]` |
-| `mysql_enabled_on_startup` | Enable mysql service | `true` |
-| `mysql_service_state` | Expected state of mysql service after configuration | `started` |
-| `mysql_install_packages` |  Do not attempt to install via apt/pkg when var are false | `yes` |
 
 Most of the time `mysql_db_admin_user` is `root`, this is chosen by operating systems packagers and therefore should not be changed.
 
