@@ -39,7 +39,7 @@
   when: mysql_installed_packages.changed or mysql_db_admin_password_update
 - name: Include tasks secure-installation.
   include_tasks: secure-installation.yml
-  when: mysql_install_packages.changed
+  when: mysql_installed_packages.changed
 - name: Include tasks databases.
   include_tasks: databases.yml
 - name: Include tasks users.
