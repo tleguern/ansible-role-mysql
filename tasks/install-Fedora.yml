@@ -24,6 +24,7 @@
 
 
 - name: Fedora - Post-installation.
+  when: mysql_installed_packages and mysql_installed_packages.changed
   block:
     - name: Fedora - Ensure MySQL database is correctly initialized (mariadb).
       ansible.builtin.command: /usr/bin/mysql_install_db
@@ -49,5 +50,3 @@
       ansible.builtin.service:
         name: "{{ mysql_service }}"
         state: started
-
-    when: mysql_installed_packages and mysql_installed_packages.changed
