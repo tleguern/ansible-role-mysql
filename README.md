@@ -43,6 +43,7 @@ collection community.mysql >= 3.1.0 (included in ansible >= 6.x)
 | `mysql_users` | The MySQL users and their privileges | `[]` |
 | `mysql_enabled_on_startup` | Enable mysql service | `true` |
 | `mysql_service_state` | Expected state of mysql service after configuration | `started` |
+| `mysql_install_packages` |  Do not attempt to install via apt/pkg when var are false | `yes` |
 
 Most of the time `mysql_db_admin_user` is `root`, this is chosen by operating systems packagers and therefore should not be changed.
 

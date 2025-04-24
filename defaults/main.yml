@@ -6,6 +6,7 @@ __mysql_db_admin_password: "{{ mysql_db_admin_password | mandatory }}"
 mysql_users: []
 mysql_provider: mariadb
 mysql_enabled_on_startup: yes
+mysql_install_packages: yes
 
 mysql_datadir: "{{ __mysql_datadir | default('dummy') }}"
 mysql_packages: "{{ __mysql_packages | default('dummy') }}"

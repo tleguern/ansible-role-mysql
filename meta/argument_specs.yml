@@ -68,6 +68,11 @@ argument_specs:
         required: no
         type: str
         default: root
+      mysql_install_packages:
+        description: "Whether or not to install the packages. If set to `false` an other mecanism should be use to ensure proper installation before applying this role."
+        required: no
+        type: bool
+        default: yes
       mysql_packages:
         description: "List of necessary packages to install MySQL or MariaDB, depend on the operating system as well as the choice of database."
         required: no
