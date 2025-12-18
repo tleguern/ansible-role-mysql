@@ -18,4 +18,6 @@ mysql_config_path: "{{ __mysql_config_path | default('dummy') }}"
 mysql_config: "{{ __mysql_system_config | default('dummy') }}"
 mysql_socket: "{{ __mysql_socket | default('dummy') }}"
 
+# mysql_default_plugin:
+
 __mysql_providers: [ 'mariadb', 'mysql' ]

@@ -3,12 +3,18 @@
   community.mysql.mysql_user:
     name: "{{ item.name }}"
     host: "{{ item.host | default('localhost') }}"
-    password: "{{ item.password }}"
     priv: "{{ item.priv | default('*.*:USAGE') }}"
     state: "{{ item.state | default('present') }}"
     append_privs: "{{ item.append_privs | default('no') }}"
-    encrypted: "{{ item.encrypted | default('no') }}"
     login_unix_socket: "{{ mysql_socket }}"
     force_context: true
+    # For MySQL version >= 8.4
+    plugin: "{{ item.plugin | default(mysql_default_plugin | default(omit)) }}"
+    plugin_auth_string: "{{ item.plugin_auth_string | default(omit) }}"
+    plugin_hash_string: "{{ item.plugin_hash_string | default(omit) }}"
+    salt: "{{ item.salt | default(omit) }}"
+    # For MySQL version < 8.4
+    password: "{{ item.password | default(omit) }}"
+    encrypted: "{{ item.encrypted | default('no') }}"
   loop: "{{ mysql_users }}"
   no_log: true

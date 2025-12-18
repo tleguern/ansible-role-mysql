@@ -161,3 +161,7 @@ argument_specs:
         choices:
           - started
           - stopped
+      mysql_default_plugin:
+        description: "Specify a default authentication plugin for every users."
+        required: no
+        type: str
