@@ -48,6 +48,7 @@
 - name: "{{ __mysql_os_name }} - Ensure alternatives point to mysql.cnf."
   community.general.alternatives:
     name: my.cnf
+    link: "/etc/mysql/my.cnf"
     path: "/etc/mysql/{{ mysql_provider }}.cnf"
 
 - name: "{{ __mysql_os_name }} - Post-installation."
