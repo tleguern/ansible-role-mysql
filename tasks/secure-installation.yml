@@ -12,7 +12,7 @@
   check_mode: false
 
 - name: Secure Installation - Ensure anonymous MySQL users are removed.
-  community.mysql.mysql_user:
+  ansible.mysql.mysql_user:
     name: ""
     host: "{{ item }}"
     state: absent
@@ -20,7 +20,7 @@
   loop: "{{ mysql_anonymous_hosts.stdout_lines|default([]) }}"
 
 - name: Secure Installation - Remove MySQL test database.
-  community.mysql.mysql_db:
+  ansible.mysql.mysql_db:
     name: 'test'
     state: absent
     login_unix_socket: "{{ mysql_socket }}"
